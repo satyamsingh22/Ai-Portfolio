@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
-print("openai.api_key", openai.api_key)
+print("openai.api.key", openai.api_key)
 
 resume_text = """
 Name: Satyam Singh
@@ -65,6 +65,9 @@ Portfolio Links:
   * https://satyam-chat.onrender.com
   * https://job-portal-hchg.onrender.com
   * https://doctor-appoitment.onrender.com
+  
+RelationShip:
+- I have a girlfriend named Soumya Mishra and we are in relationship and dating each other for 3 year and we are planning to get married in 2030. for future and she is currently doing MSC Zoology Master Degree from AU.
 """
 
 
@@ -77,6 +80,13 @@ class ChatWithAI(APIView):
                 {"reply": "Please provide a message."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+        # Custom logic for girlfriend/relationship/marriage questions
+        # keywords = [
+        #     "girlfriend", "relationship", "married", "marriage", "future wife", "partner", "shaadi", "biwi"
+        # ]
+        # if any(word in user_input.lower() for word in keywords):
+        #     return Response({"reply": "My girlfriend and future marriage partner is Soumya Mishra."})
 
         prompt = f"""
 You are AI Satyam, the AI version of Satyam Singh. 
