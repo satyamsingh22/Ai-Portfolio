@@ -1,20 +1,46 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaMicrophoneAlt, FaMicrophoneSlash } from "react-icons/fa";
 
 export default function VoiceAgentPage() {
   const [isListening, setIsListening] = useState(false);
   const [micOn, setMicOn] = useState(false);
+  const [userSpeech, setUserSpeech] = useState(""); // <-- NEW: store what user says
+  const recognitionRef = useRef(null);
 
-  // Handle mic toggle
+  // Start/stop speech recognition
   const handleMicToggle = () => {
-    setMicOn((prev) => !prev);
+    if (!micOn) {
+      if (
+        "webkitSpeechRecognition" in window ||
+        "SpeechRecognition" in window
+      ) {
+        const SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = "en-US";
+        recognition.interimResults = false;
+        recognition.onresult = (event) => {
+          const text = event.results[0][0].transcript;
+          setUserSpeech(text); // <-- set what user said
+        };
+        recognitionRef.current = recognition;
+        recognition.start();
+        setMicOn(true);
+      } else {
+        alert("Speech Recognition not supported in this browser.");
+      }
+    } else {
+      recognitionRef.current?.stop();
+      setMicOn(false);
+    }
   };
 
   // Reset everything on end
   const handleEnd = () => {
     setIsListening(false);
     setMicOn(false);
+    setUserSpeech("");
   };
 
   return (
@@ -37,6 +63,7 @@ export default function VoiceAgentPage() {
             onClick={() => {
               setIsListening(true);
               setMicOn(true);
+              setUserSpeech("");
             }}
             className="flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-blue-400 to-violet-600 text-white font-bold shadow-lg hover:scale-105 transition-transform text-lg"
           >
@@ -85,8 +112,14 @@ export default function VoiceAgentPage() {
           {/* Chat area */}
           <div className="bg-[#2c356f] text-white w-full rounded-lg p-4 h-40 overflow-y-auto">
             <p className="mb-2">
-              <strong>Satyam Singh:</strong> Hi, I'm a Senior Software Engineer at
-              Kipps AI. Are you looking to collaborate on a...
+              <strong>You:</strong>{" "}
+              {userSpeech || (
+                <span className="text-gray-400">Say something...</span>
+              )}
+            </p>
+            <p className="mb-2">
+              <strong>Satyam Singh:</strong> Hi, I'm a Senior Software Engineer
+              at Kipps AI. Are you looking to collaborate on a...
             </p>
           </div>
 

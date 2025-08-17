@@ -148,16 +148,17 @@ export default function HomePage() {
         </div>
         {/* Right Part */}
         <div className="flex-1 flex justify-center items-center relative">
-          <div className="relative group">
-            <div className="absolute -inset-2 bg-gradient-to-tr from-blue-400 via-indigo-400 to-violet-600 rounded-full blur-xl opacity-60 group-hover:opacity-90 transition duration-300"></div>
+          <div className="relative w-100 h-150 flex items-center justify-center">
+            {/* Only border and shadow, no color overlay */}
             <Image
-              src="/profile.jpg"
+              src="/profile.png"
               alt="Satyam Singh"
-              width={320}
-              height={320}
-              className="rounded-full object-cover shadow-2xl border-4 border-white"
+              width={420}
+              height={420}
+              className="rounded-full object-cover shadow-2xl border-8 border-white w-100 h-150"
               priority
             />
+            <div className="absolute inset-0 rounded-full border-4 border-indigo-400 pointer-events-none"></div>
           </div>
         </div>
       </div>
