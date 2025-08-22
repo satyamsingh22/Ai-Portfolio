@@ -53,15 +53,12 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Total GitHub commits (public + private)
   const [commits, setCommits] = useState(null);
   useEffect(() => {
     async function fetchOverallContributions() {
       try {
         const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
-        console.log("GitHub Token:", GITHUB_TOKEN);
 
-        // 1. Get account creation date
         const userQuery = `
         query {
           viewer {
@@ -142,7 +139,7 @@ export default function HomePage() {
   return (
     <section className="flex flex-col items-center justify-center min-h-[80vh] px-4 py-12 bg-gradient-to-br from-blue-50 via-indigo-50 to-indigo-100">
       <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-10">
-        {/* Left Part */}
+
         <div className="flex-1 flex flex-col justify-center">
           <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-600 font-extrabold text-lg mb-2 tracking-widest uppercase drop-shadow-lg">
             Welcome to My Blogs
