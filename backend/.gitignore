@@ -1,1 +1,5 @@
 .env
+node_modules/
+dist/
+venv/
+google_speech.json/

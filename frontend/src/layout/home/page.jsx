@@ -53,46 +53,89 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Total GitHub commits (public, all repos)
+  // Total GitHub commits (public + private)
   const [commits, setCommits] = useState(null);
-
   useEffect(() => {
-    async function fetchCommits() {
-      let total = 0;
+    async function fetchOverallContributions() {
       try {
-        // 1. Get all public repos
-        const reposRes = await fetch(
-          "https://api.github.com/users/satyamsingh22/repos?per_page=100"
-        );
-        const repos = await reposRes.json();
+        const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
-        // 2. For each repo, get your commit count
-        for (const repo of repos) {
-          const commitsRes = await fetch(
-            `https://api.github.com/repos/satyamsingh22/${repo.name}/commits?author=satyamsingh22&per_page=1`
-          );
-          // Get total from the 'link' header if paginated
-          const link = commitsRes.headers.get("link");
-          if (link && link.includes('rel="last"')) {
-            // Extract the last page number from the link header
-            const match = link.match(/&page=(\d+)>; rel="last"/);
-            if (match) {
-              total += parseInt(match[1], 10);
-            }
-          } else {
-            // If not paginated, check if there is at least one commit
-            const commitsArr = await commitsRes.json();
-            if (Array.isArray(commitsArr) && commitsArr.length > 0) {
-              total += commitsArr.length;
-            }
+        // 1. Get account creation date
+        const userQuery = `
+        query {
+          viewer {
+            createdAt
           }
         }
+      `;
+
+        const userRes = await fetch("https://api.github.com/graphql", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: userQuery }),
+        });
+        const userData = await userRes.json();
+        const createdAt = new Date(userData.data.viewer.createdAt);
+
+        // 2. Loop year by year
+        const today = new Date();
+        let total = 0;
+
+        for (
+          let year = createdAt.getFullYear();
+          year <= today.getFullYear();
+          year++
+        ) {
+          const from = new Date(year, 0, 1).toISOString();
+          const to = new Date(year, 11, 31, 23, 59, 59).toISOString();
+
+          const query = `
+          query {
+            viewer {
+              contributionsCollection(from: "${from}", to: "${to}") {
+                totalCommitContributions
+                restrictedContributionsCount
+                totalIssueContributions
+                totalPullRequestContributions
+                totalPullRequestReviewContributions
+                totalRepositoryContributions
+              }
+            }
+          }
+        `;
+
+          const response = await fetch("https://api.github.com/graphql", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${GITHUB_TOKEN}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query }),
+          });
+
+          const data = await response.json();
+          const c = data.data.viewer.contributionsCollection;
+
+          total +=
+            c.totalCommitContributions +
+            c.restrictedContributionsCount +
+            c.totalIssueContributions +
+            c.totalPullRequestContributions +
+            c.totalPullRequestReviewContributions +
+            c.totalRepositoryContributions;
+        }
+
         setCommits(total);
-      } catch (e) {
+      } catch (error) {
+        console.error("Error fetching GitHub contributions:", error);
         setCommits(null);
       }
     }
-    fetchCommits();
+
+    fetchOverallContributions();
   }, []);
 
   return (
@@ -174,11 +217,34 @@ export default function HomePage() {
         </div>
         {/* GitHub Commits Block */}
         <div className="bg-white/80 rounded-xl shadow-lg p-6 flex flex-col items-center border border-blue-100">
-          <div className="text-3xl font-bold text-blue-600">
-            {commits !== null ? commits : "--"}
+          <div className="text-3xl font-bold text-blue-600 min-h-[2.5rem] flex items-center justify-center">
+            {commits === null ? (
+              <svg
+                className="animate-spin h-7 w-7 text-blue-400"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                ></path>
+              </svg>
+            ) : (
+              commits.toLocaleString()
+            )}
           </div>
           <div className="text-lg font-semibold text-gray-700 mt-2">
-            GitHub Commits (total)
+            Total GitHub Commits
           </div>
           <div className="text-xs text-gray-500 mt-1">
             <a
