@@ -59,6 +59,7 @@ export default function HomePage() {
     async function fetchOverallContributions() {
       try {
         const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+        console.log("GitHub Token:", GITHUB_TOKEN);
 
         // 1. Get account creation date
         const userQuery = `
