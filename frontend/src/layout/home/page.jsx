@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const TITLES = [
   "Full Stack Developer",
   "Senior Software Developer",
-  "MERN Developer",
+  "AI Integrator Expert",
 ];
 
 function getDaysSinceStart(startDate) {
