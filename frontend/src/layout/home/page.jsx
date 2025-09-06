@@ -198,18 +198,34 @@ export default function HomePage() {
             across web and mobile platforms.
           </p>
           {/* Buttons */}
-          <div className="flex gap-4 mt-6">
+          <div className="flex flex-col gap-4 mt-6 w-fit">
+            <div className="flex gap-4 flex-wrap">
+              <a
+                href="/voiceagent"
+                className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-400 to-violet-600 text-white font-bold shadow-lg hover:scale-105 transition-transform"
+              >
+                Talk with AI Me
+              </a>
+              <a
+                href="/chatagent"
+                className="px-6 py-2 rounded-full border-2 border-indigo-400 text-indigo-700 font-bold bg-white/80 hover:bg-indigo-50 shadow-md hover:scale-105 transition-transform"
+              >
+                AI Chat
+              </a>
+            </div>
             <a
-              href="/voiceagent"
-              className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-400 to-violet-600 text-white font-bold shadow-lg hover:scale-105 transition-transform"
+              href="https://wa.me/15557877787"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2 rounded-full border-2 border-green-400 text-green-700 font-bold bg-white/80 hover:bg-green-50 shadow-md hover:scale-105 transition-transform"
+              style={{
+                minWidth: 140,
+                textAlign: "center",
+                fontSize: "1.1rem",
+                letterSpacing: "0.5px",
+              }}
             >
-              Talk with AI Me
-            </a>
-            <a
-              href="/chatagent"
-              className="px-6 py-2 rounded-full border-2 border-indigo-400 text-indigo-700 font-bold bg-white/80 hover:bg-indigo-50 shadow-md hover:scale-105 transition-transform"
-            >
-              AI Chat
+              Chat with my WhatsApp Agent
             </a>
           </div>
         </div>
