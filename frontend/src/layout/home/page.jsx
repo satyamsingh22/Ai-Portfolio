@@ -168,7 +168,7 @@ export default function HomePage() {
       <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-10">
         <div className="flex-1 flex flex-col justify-center">
           <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-600 font-extrabold text-lg mb-2 tracking-widest uppercase drop-shadow-lg">
-            Welcome to My Blogs
+            Welcome to My Blogs Page
           </div>
           <h1 className="text-5xl md:text-6xl font-extrabold mb-3 text-gray-900 drop-shadow-xl">
             Hi, I'm{" "}
