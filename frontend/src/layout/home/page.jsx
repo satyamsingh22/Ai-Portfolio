@@ -6,13 +6,30 @@ import { useEffect, useState } from "react";
 const TITLES = [
   "Full Stack Developer",
   "Senior Software Developer",
-  "AI Integrator Expert",
+  "AI Integration Expert",
 ];
 
 function getDaysSinceStart(startDate) {
   const now = new Date();
   const diff = now.getTime() - startDate.getTime();
   return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
+function getExperienceDuration(startDate) {
+  const now = new Date();
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  let days = now.getDate() - startDate.getDate();
+
+  if (days < 0) {
+    months -= 1;
+    days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+  }
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+  return { years, months, days };
 }
 
 export default function HomePage() {
@@ -49,6 +66,16 @@ export default function HomePage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setDays(getDaysSinceStart(new Date("2024-08-01")));
+    }, 1000 * 60 * 60);
+    return () => clearInterval(interval);
+  }, []);
+
+  const [experience, setExperience] = useState(() =>
+    getExperienceDuration(new Date("2024-08-01"))
+  );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setExperience(getExperienceDuration(new Date("2024-08-01")));
     }, 1000 * 60 * 60);
     return () => clearInterval(interval);
   }, []);
@@ -139,7 +166,6 @@ export default function HomePage() {
   return (
     <section className="flex flex-col items-center justify-center min-h-[80vh] px-4 py-12 bg-gradient-to-br from-blue-50 via-indigo-50 to-indigo-100">
       <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-10">
-
         <div className="flex-1 flex flex-col justify-center">
           <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-600 font-extrabold text-lg mb-2 tracking-widest uppercase drop-shadow-lg">
             Welcome to My Blogs
@@ -207,9 +233,41 @@ export default function HomePage() {
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
         {/* Experience Block */}
         <div className="bg-white/80 rounded-xl shadow-lg p-6 flex flex-col items-center border border-green-100">
-          <div className="text-3xl font-bold text-green-600">{days}+</div>
+          <div className="flex gap-2 items-center justify-center text-3xl font-bold">
+            {experience.years > 0 && (
+              <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 border border-green-300 shadow">
+                {experience.years}{" "}
+                <span className="text-base font-semibold">
+                  Year{experience.years > 1 ? "s" : ""}
+                </span>
+              </span>
+            )}
+            {experience.months > 0 && (
+              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 border border-blue-300 shadow">
+                {experience.months}{" "}
+                <span className="text-base font-semibold">
+                  Month{experience.months > 1 ? "s" : ""}
+                </span>
+              </span>
+            )}
+            {experience.days > 0 && (
+              <span className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-300 shadow">
+                {experience.days}{" "}
+                <span className="text-base font-semibold">
+                  Day{experience.days > 1 ? "s" : ""}
+                </span>
+              </span>
+            )}
+            {experience.years === 0 &&
+              experience.months === 0 &&
+              experience.days === 0 && (
+                <span className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 border border-gray-300 shadow">
+                  Just Started!
+                </span>
+              )}
+          </div>
           <div className="text-lg font-semibold text-gray-700 mt-2">
-            Days of Experience
+            Experience
           </div>
           <div className="text-xs text-gray-500 mt-1">Since August 2024</div>
         </div>
