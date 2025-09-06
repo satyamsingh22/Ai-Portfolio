@@ -28,31 +28,29 @@ export default function BlogDetailPage() {
 
   if (loading)
     return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
         <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-600 mb-4"></div>
-          <p className="text-indigo-700 font-medium text-lg">
-            Loading blog content...
-          </p>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading blog content...</p>
         </div>
       </div>
     );
 
   if (!blog)
     return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
-        <div className="text-center p-8 bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-indigo-100/70 transform hover:scale-105 transition-transform duration-300">
-          <div className="text-6xl mb-4">📝</div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+      <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8 bg-white rounded-lg shadow-sm border border-gray-200 max-w-md">
+          <div className="text-5xl mb-4">📝</div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
             Blog Not Found
           </h2>
-          <p className="text-gray-600 max-w-md">
+          <p className="text-gray-600 mb-6">
             The blog post you're looking for doesn't exist or may have been
             removed.
           </p>
           <button
             onClick={() => window.history.back()}
-            className="mt-6 px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full font-medium hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="px-5 py-2 bg-blue-500 text-white rounded-md font-medium hover:bg-blue-600 transition-colors"
           >
             Go Back
           </button>
@@ -67,349 +65,293 @@ export default function BlogDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-12 px-4 flex flex-col gap-12">
-      {/* Section 1: Header */}
-      <section
-        id="header"
-        className="max-w-4xl mx-auto text-center animate-fade-in bg-white/80 rounded-3xl shadow-xl border border-indigo-100/70 p-8 mb-0 transition-transform duration-300 hover:scale-[1.02]"
-      >
-        <div className="inline-block px-4 py-2 mb-4 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full border border-indigo-100/60 shadow-sm">
-          <span className="text-sm font-medium text-indigo-600">
-            Blog Article
-          </span>
-        </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-          {blog.tittle}
-        </h1>
-        <div className="flex items-center justify-center space-x-4 text-gray-600">
-          <div className="flex items-center">
-            <svg
-              className="w-5 h-5 mr-2 text-indigo-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span className="font-medium">{blog.author}</span>
-          </div>
-          <span>•</span>
-          <div className="flex items-center">
-            <svg
-              className="w-5 h-5 mr-2 text-indigo-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>
-              {new Date(blog.created_at).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
-          </div>
-        </div>
-        {/* Section navigation dots */}
-        <div className="flex justify-center mt-6 gap-3">
-          <button
-            onClick={() =>
-              document
-                .getElementById("header")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="w-4 h-4 rounded-full bg-indigo-400 border-2 border-indigo-700 shadow transition-all hover:scale-125"
-          ></button>
-          <button
-            onClick={() =>
-              document
-                .getElementById("content")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="w-4 h-4 rounded-full bg-purple-400 border-2 border-purple-700 shadow transition-all hover:scale-125"
-          ></button>
-          <button
-            onClick={() =>
-              document
-                .getElementById("footer")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="w-4 h-4 rounded-full bg-pink-400 border-2 border-pink-700 shadow transition-all hover:scale-125"
-          ></button>
-        </div>
-      </section>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-gray-900 text-gray-100">
+      {/* Banner Section - Full Width Gradient */}
+      <div className="relative w-full mb-8">
+        <div className="bg-gradient-to-r from-yellow-900 via-red-900 to-gray-900 w-full shadow-lg">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start justify-between px-8 py-10">
+            {/* Left Side */}
+            <div className="relative z-10">
+              <button
+                onClick={() => window.history.back()}
+                className="flex items-center text-gray-200 hover:text-yellow-300 mb-6 text-sm font-medium"
+              >
+                ← Back to Blog
+              </button>
 
-      {/* Section 2: Content */}
-      <section
-        id="content"
-        className="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-indigo-100/60 animate-fade-in-up transition-transform duration-300 hover:scale-[1.01]"
-      >
-        {blog.image && (
-          <div className="relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 z-10"></div>
-            <img
-              src={blog.image}
-              alt={blog.tittle}
-              className="w-full h-72 md:h-96 object-cover transition-all duration-700 hover:scale-105"
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20">
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 border border-white/30 inline-block">
-                <p className="text-sm font-medium">Featured Image</p>
+              {/* Tags + Meta */}
+              <div className="flex items-center gap-3 mb-6 flex-wrap">
+                <span className="px-3 py-1 bg-gray-800 bg-opacity-70 text-yellow-200 rounded-full text-sm font-medium">
+                  Comparison Blog
+                </span>
+                <span className="px-3 py-1 bg-gray-800 bg-opacity-70 text-yellow-200 rounded-full text-sm font-medium">
+                  AI Voice Agent
+                </span>
+                <span className="flex items-center text-gray-300 text-sm">
+                  <svg
+                    className="w-4 h-4 mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M6 2a1 1 0 00-1 1v1H4a2 2..."></path>
+                  </svg>
+                  {new Date(blog.created_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+                <span className="flex items-center text-gray-300 text-sm">
+                  <svg
+                    className="w-4 h-4 mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 2a8 8 0 100 16..."></path>
+                  </svg>
+                  5 min
+                </span>
+              </div>
+
+              {/* Title with stylish font */}
+              <h1 className="text-5xl font-extrabold font-serif tracking-wide text-yellow-100 mb-4 leading-snug drop-shadow">
+                {blog.tittle}
+              </h1>
+
+              {/* Summary */}
+              {blog.summary && (
+                <p className="text-lg text-gray-200 mb-8 leading-relaxed font-light">
+                  {blog.summary}
+                </p>
+              )}
+
+              {/* Author with Gradient Initials */}
+              <div className="flex items-center gap-3 border-t border-gray-700 pt-6">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-tr from-yellow-700 via-red-700 to-gray-800 text-yellow-100 font-bold text-xl shadow-lg">
+                  {blog.author
+                    ? blog.author
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .toUpperCase()
+                    : "A"}
+                </div>
+                <div>
+                  <p className="font-semibold text-yellow-100">{blog.author}</p>
+                  <p className="text-sm text-gray-400">Author</p>
+                </div>
               </div>
             </div>
+
+            {/* Right Side - Featured Image */}
+            {blog.image && (
+              <div className="relative z-10 rounded-2xl overflow-hidden shadow-md self-end ml-auto">
+                <img
+                  src={blog.image}
+                  alt={blog.tittle}
+                  className="w-full max-w-lg h-64 lg:h-110 object-cover rounded-2xl"
+                />
+              </div>
+            )}
           </div>
-        )}
-        <article className="p-8 md:p-12 h-[400px] md:h-[700px] overflow-y-auto scrollbar-thin">
-          <div className="prose prose-lg max-w-none">
+        </div>
+      </div>
+      {/* Blog Content + Right Side Boxes */}
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8">
+        {/* Blog Content */}
+        <div className="flex-1 bg-gray-900 rounded-2xl shadow-md p-8 mb-8 lg:mb-0 border border-gray-800">
+          <article className="prose max-w-none prose-lg prose-invert prose-code:font-mono prose-code:text-base prose-code:bg-gray-800 prose-code:rounded prose-code:px-2 prose-code:py-1 prose-code:text-yellow-300 prose-blockquote:border-yellow-700 prose-blockquote:bg-gray-800 prose-blockquote:italic prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-lg prose-h1:text-yellow-200 prose-h2:text-yellow-300 prose-h3:text-yellow-400 prose-a:text-yellow-400 prose-a:underline hover:prose-a:text-yellow-200">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               components={{
                 h1: ({ node, ...props }) => (
                   <h1
-                    className="text-4xl font-bold text-gray-900 mt-10 mb-6 pb-3 border-b border-indigo-100/60"
+                    className="text-3xl font-extrabold text-yellow-200 mt-10 mb-6 drop-shadow"
                     {...props}
                   />
                 ),
                 h2: ({ node, ...props }) => (
                   <h2
-                    className="text-3xl font-bold text-gray-800 mt-10 mb-5 text-indigo-700"
+                    className="text-2xl font-bold text-yellow-300 mt-8 mb-5"
                     {...props}
                   />
                 ),
                 h3: ({ node, ...props }) => (
                   <h3
-                    className="text-2xl font-semibold text-gray-800 mt-8 mb-4 text-indigo-600"
+                    className="text-xl font-semibold text-yellow-400 mt-6 mb-4"
                     {...props}
                   />
                 ),
                 p: ({ node, ...props }) => (
                   <p
-                    className="text-lg text-gray-700 mb-6 leading-8"
+                    className="text-gray-200 mb-5 leading-relaxed text-lg"
                     {...props}
                   />
                 ),
                 ul: ({ node, ...props }) => (
-                  <ul className="mb-6 pl-7 list-disc" {...props} />
+                  <ul className="mb-5 pl-6 list-disc" {...props} />
                 ),
                 ol: ({ node, ...props }) => (
-                  <ol className="mb-6 pl-7 list-decimal" {...props} />
+                  <ol className="mb-5 pl-6 list-decimal" {...props} />
                 ),
                 li: ({ node, ...props }) => (
-                  <li
-                    className="text-lg text-gray-700 ml-4 pl-2 leading-7 marker:text-indigo-500"
-                    {...props}
-                  />
+                  <li className="text-gray-300 mb-2 text-base" {...props} />
                 ),
                 a: ({ node, ...props }) => (
                   <a
-                    className="text-indigo-600 hover:text-indigo-800 underline transition-colors duration-300 font-medium"
+                    className="text-yellow-400 underline hover:text-yellow-200 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     {...props}
                   />
                 ),
-                strong: ({ node, ...props }) => (
-                  <strong className="font-bold text-gray-900" {...props} />
-                ),
                 blockquote: ({ node, ...props }) => (
                   <blockquote
-                    className="border-l-4 border-indigo-500 pl-6 py-2 my-8 bg-indigo-50/50 italic text-gray-700 rounded-r-lg"
+                    className="border-l-4 border-yellow-700 pl-4 py-2 my-6 bg-gray-800 italic text-gray-300 rounded-lg"
                     {...props}
                   />
                 ),
                 table: ({ node, ...props }) => (
-                  <div className="overflow-x-auto my-8 rounded-lg shadow-sm border border-indigo-100">
+                  <div className="overflow-x-auto my-6">
                     <table
-                      className="min-w-full divide-y divide-indigo-100"
+                      className="min-w-full divide-y divide-gray-700"
                       {...props}
                     />
                   </div>
                 ),
                 th: ({ node, ...props }) => (
                   <th
-                    className="px-6 py-3 bg-indigo-50 text-left text-xs font-medium text-indigo-700 uppercase tracking-wider"
+                    className="px-4 py-2 bg-gray-800 text-left text-base font-semibold text-yellow-300"
                     {...props}
                   />
                 ),
                 td: ({ node, ...props }) => (
                   <td
-                    className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 border-t border-indigo-100"
+                    className="px-4 py-2 text-base text-gray-200 border-t border-gray-700"
                     {...props}
                   />
                 ),
                 pre: ({ node, ...props }) => (
                   <pre
-                    className="bg-gray-900 text-green-400 rounded-xl p-5 my-8 overflow-x-auto text-sm font-mono border border-gray-800 shadow-inner scrollbar-thin"
+                    className="bg-gray-800 text-yellow-300 rounded-lg p-4 my-6 overflow-x-auto text-base font-mono"
                     {...props}
                   />
                 ),
                 code: ({ node, ...props }) => (
                   <code
-                    className="bg-gray-100 text-pink-600 px-2 py-1 rounded text-sm font-mono"
+                    className="bg-gray-900 text-yellow-300 px-2 py-1 rounded font-mono text-base"
                     {...props}
                   />
                 ),
                 img: ({ node, ...props }) => (
-                  <div className="my-8 rounded-xl overflow-hidden border border-indigo-100/60 shadow-md hover:scale-105 transition-transform duration-300">
-                    <img className="w-full h-auto" {...props} />
+                  <div className="my-8 flex justify-center">
+                    <img
+                      className="w-full max-w-xl h-auto rounded-lg shadow-lg"
+                      {...props}
+                    />
                   </div>
                 ),
               }}
             >
               {markdownContent}
             </ReactMarkdown>
-          </div>
-        </article>
-      </section>
-
-      {/* Section 3: Footer */}
-      <section
-        id="footer"
-        className="max-w-4xl mx-auto bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 rounded-3xl shadow-xl border border-indigo-100/70 p-8 flex flex-col sm:flex-row justify-between items-center animate-fade-in-up transition-transform duration-300 hover:scale-[1.02]"
-      >
-        <div className="flex items-center mb-4 sm:mb-0">
-          <div className="w-12 h-12 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-            {blog.author.charAt(0)}
-          </div>
-          <div>
-            <p className="font-medium text-gray-800">
-              Written by {blog.author}
+          </article>
+        </div>
+        {/* Right Side - Two Boxes */}
+        <div className="flex flex-col gap-10 items-center justify-start w-full lg:w-96">
+          {/* Share Box */}
+          <div className="w-full h-56 bg-gray-900 rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center border border-yellow-900">
+            <h3 className="text-xl font-bold text-yellow-200 mb-3 tracking-tight">
+              Share this article
+            </h3>
+            <p className="text-base text-gray-400 mb-6 text-center">
+              Help others discover this content
             </p>
-            <p className="text-sm text-gray-500">
-              Posted on {new Date(blog.created_at).toLocaleDateString()}
+            <div className="flex gap-6 mb-2">
+              {/* Twitter */}
+              <a
+                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                  window.location.href
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-yellow-300 transition"
+              >
+                <svg
+                  className="w-7 h-7"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22.46 6c-.77.35-1.6.59-2.47.7a4.3 4.3 0 0 0 1.88-2.38c-.83.5-1.75.86-2.72 1.06A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99C7.69 9.13 4.07 7.2 1.64 4.16c-.37.64-.58 1.38-.58 2.17 0 1.5.76 2.83 1.92 3.61-.71-.02-1.38-.22-1.97-.54v.05c0 2.09 1.49 3.83 3.47 4.23-.36.1-.74.16-1.13.16-.28 0-.54-.03-.8-.08.54 1.68 2.11 2.9 3.97 2.93A8.6 8.6 0 0 1 2 19.54a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.38-.01-.57A8.72 8.72 0 0 0 24 4.59a8.48 8.48 0 0 1-2.54.7z" />
+                </svg>
+              </a>
+              {/* LinkedIn */}
+              <a
+                href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+                  window.location.href
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-yellow-300 transition"
+              >
+                <svg
+                  className="w-7 h-7"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.25c-.97 0-1.75-.78-1.75-1.75s.78-1.75 1.75-1.75 1.75.78 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.25h-3v-5.5c0-1.32-.03-3-1.83-3-1.83 0-2.11 1.43-2.11 2.91v5.59h-3v-10h2.88v1.36h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59v5.61z" />
+                </svg>
+              </a>
+              {/* Facebook */}
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                  window.location.href
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-yellow-300 transition"
+              >
+                <svg
+                  className="w-7 h-7"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22.675 0h-21.35c-.733 0-1.325.592-1.325 1.326v21.348c0 .733.592 1.326 1.325 1.326h11.495v-9.294h-3.128v-3.622h3.128v-2.672c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12v9.294h6.116c.733 0 1.325-.593 1.325-1.326v-21.349c0-.734-.592-1.326-1.325-1.326z" />
+                </svg>
+              </a>
+              {/* Copy */}
+              <button
+                onClick={() =>
+                  navigator.clipboard.writeText(window.location.href)
+                }
+                className="text-gray-400 hover:text-yellow-300 transition"
+                title="Copy link"
+              >
+                <svg
+                  className="w-7 h-7"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 17l4 4 4-4m-4-5v9" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          {/* Author Box */}
+          <div className="w-full h-56 bg-gray-900 rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center border border-yellow-900">
+            <div className="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-tr from-yellow-700 via-red-700 to-gray-800 text-yellow-100 font-extrabold text-4xl shadow mb-4">
+              SS
+            </div>
+            <p className="font-bold text-xl text-yellow-100 mb-1">
+              Satyam Singh
             </p>
+            <p className="text-base text-gray-400">Author</p>
           </div>
         </div>
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="px-5 py-2.5 bg-indigo-100 text-indigo-700 rounded-full font-medium hover:bg-indigo-200 transition-colors duration-300 flex items-center"
-        >
-          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-          Back to Top
-        </button>
-      </section>
-
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        .animate-fade-in-up {
-          opacity: 0;
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        /* Custom scrollbar for code blocks */
-        .scrollbar-thin::-webkit-scrollbar {
-          height: 6px;
-        }
-
-        .scrollbar-thin::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 3px;
-        }
-
-        .scrollbar-thin::-webkit-scrollbar-thumb {
-          background: rgba(72, 187, 120, 0.6);
-          border-radius: 3px;
-        }
-
-        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-          background: rgba(72, 187, 120, 0.8);
-        }
-
-        /* Smooth scrolling for the entire page */
-        html {
-          scroll-behavior: smooth;
-        }
-
-        /* Prose styling for better readability */
-        .prose {
-          color: #374151;
-        }
-
-        .prose p {
-          margin-bottom: 1.5rem;
-        }
-
-        .prose h1,
-        .prose h2,
-        .prose h3,
-        .prose h4 {
-          font-weight: 700;
-          margin-top: 2.5rem;
-          margin-bottom: 1.5rem;
-        }
-
-        .prose ul,
-        .prose ol {
-          margin-bottom: 1.5rem;
-        }
-
-        .prose blockquote {
-          margin: 2rem 0;
-          padding: 1.5rem;
-          font-style: italic;
-        }
-
-        .prose code {
-          padding: 0.2rem 0.4rem;
-          border-radius: 0.25rem;
-          font-size: 0.9em;
-        }
-
-        .prose pre {
-          margin: 2rem 0;
-          padding: 1.5rem;
-          border-radius: 0.5rem;
-          overflow-x: auto;
-        }
-
-        .prose table {
-          width: 100%;
-          margin: 2rem 0;
-          border-collapse: collapse;
-        }
-
-        .prose th,
-        .prose td {
-          padding: 0.75rem 1rem;
-          border: 1px solid #e5e7eb;
-        }
-      `}</style>
+      </div>
     </div>
   );
 }
