@@ -2,6 +2,8 @@
 import openai
 import os
 from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView,RetrieveAPIView
+
 from rest_framework.response import Response
 from rest_framework import status
 from dotenv import load_dotenv
@@ -14,6 +16,8 @@ import json
 import jwt
 import uuid
 from rest_framework import status
+from .models import Blog,Voicebot
+from .serializer import BlogSerializer
 
 load_dotenv()
 
@@ -167,16 +171,25 @@ def get_livekit_token(request):
         "url": url
     }, status=status.HTTP_200_OK)
 
-@csrf_exempt
-def increment_voicebot_view(request, voicebot_id):
-    print(f"Incrementing view for voicebot ID: {voicebot_id}")
-    try:
-        voicebot = VoiceBot.objects.get(id=voicebot_id)
-        voicebot.views += 1
-        voicebot.save()
-        return JsonResponse({"message": "View count incremented", "views": voicebot.views}, status=200)
-    except VoiceBot.DoesNotExist:
-        return JsonResponse({"error": "VoiceBot not found"}, status=404)
-    except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
+# @csrf_exempt
+# def increment_voicebot_view(request, voicebot_id):
+#     print(f"Incrementing view for voicebot ID: {voicebot_id}")
+#     try:
+#         voicebot = VoiceBot.objects.get(id=voicebot_id)
+#         voicebot.views += 1
+#         voicebot.save()
+#         return JsonResponse({"message": "View count incremented", "views": voicebot.views}, status=200)
+#     except VoiceBot.DoesNotExist:
+#         return JsonResponse({"error": "VoiceBot not found"}, status=404)
+#     except Exception as e:
+#         return JsonResponse({"error": str(e)}, status=500)
 
+class BlogList(ListCreateAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+
+
+
+class BlogDetail(RetrieveAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
