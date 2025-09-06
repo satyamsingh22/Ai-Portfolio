@@ -34,6 +34,30 @@ const BLOGS = [
     image:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
   },
+    {
+    id: 4,
+    tittle: "AI for Beginners",
+    author: "Satyam Singh",
+    created_at: "2024-03-10T09:00:00Z",
+    summary: "Getting started with AI: tools, tips, and resources.",
+    image: "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: 5,
+    tittle: "React Best Practices",
+    author: "Satyam Singh",
+    created_at: "2024-02-05T09:00:00Z",
+    summary: "Improve your React code with these best practices.",
+    image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: 6,
+    tittle: "Deploying MERN Apps",
+    author: "Satyam Singh",
+    created_at: "2024-01-15T09:00:00Z",
+    summary: "Step-by-step guide to deploy MERN stack applications.",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80",
+  },
 ];
 
 export default function BlogPage() {
