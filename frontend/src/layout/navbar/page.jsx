@@ -9,9 +9,9 @@ export default function Navbar() {
         {/* Left Logo */}
         <div className="relative group">
           <div className="absolute -inset-2 bg-gradient-to-tr from-blue-400 via-indigo-400 to-violet-600 rounded-full blur-lg opacity-70 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
-          <div className="relative bg-gradient-to-r from-blue-400 to-violet-500 text-white text-3xl font-bold rounded-full w-14 h-14 flex justify-center items-center shadow-lg border-4 border-white select-none">
+          <a href="/" className="relative bg-gradient-to-r from-blue-400 to-violet-500 text-white text-3xl font-bold rounded-full w-14 h-14 flex justify-center items-center shadow-lg border-4 border-white select-none cursor-pointer" >
             SS
-          </div>
+          </a>
         </div>
 
         {/* Tabs aligned to the right */}
