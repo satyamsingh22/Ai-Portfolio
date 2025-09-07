@@ -28,10 +28,10 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-indigo-100 px-4 py-12">
+    <section className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-indigo-100  pb-12">
       {/* Banner Section */}
       <div
-        className="w-full h-56 md:h-72 bg-gradient-to-r from-blue-400 via-indigo-500 to-violet-600 flex items-center justify-center shadow-lg mb-10 rounded-b-3xl relative overflow-hidden"
+        className="w-full min-h-[180px] md:min-h-[280px] flex items-center justify-center shadow-lg mb-10 rounded-b-3xl relative overflow-hidden"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80')",
@@ -40,19 +40,18 @@ export default function ContactPage() {
         }}
       >
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg tracking-wide mb-3">
+        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-2 py-6 md:px-8">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg tracking-wide mb-2 md:mb-3 text-center">
             Get In Touch
           </h1>
-          <p className="text-white text-center text-base md:text-lg font-medium max-w-xl drop-shadow mb-2">
+          <p className="text-white text-center text-sm sm:text-base md:text-lg font-medium max-w-lg md:max-w-xl drop-shadow mb-2">
             Have an idea, project, or just want to connect?{" "}
-            <br className="hidden md:block" />
-            I love collaborating on innovative tech, AI, and web solutions.{" "}
-            <br />
+            <br className="hidden md:block" />I love collaborating on innovative
+            tech, AI, and web solutions. <br />
             Reach out for freelance work, partnerships, or a friendly chat about
             software and AI!
           </p>
-          <span className="inline-block mt-2 px-4 py-1 rounded-full bg-indigo-600/80 text-white font-semibold text-xs md:text-sm shadow">
+          <span className="inline-block mt-2 px-4 py-1 rounded-full bg-indigo-600/80 text-white font-semibold text-xs md:text-sm shadow text-center whitespace-normal">
             Senior Developer | Generative AI | Open for Collaboration
           </span>
         </div>
@@ -61,7 +60,7 @@ export default function ContactPage() {
       {/* Main Content - Grid Layout */}
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10">
         {/* Left Side - Profile Section */}
-        <div className="bg-white/90 rounded-3xl shadow-2xl p-8 border border-indigo-100 backdrop-blur-md flex flex-col items-center text-center">
+        <div className="bg-gradient-to-br from-indigo-100 via-blue-100 to-yellow-400 rounded-3xl shadow-2xl p-8 border border-indigo-100 backdrop-blur-md flex flex-col items-center text-center">
           <img
             src="/imag1.png"
             alt="Satyam Singh"
@@ -71,7 +70,7 @@ export default function ContactPage() {
             Satyam Singh
           </h2>
           <p className="text-gray-700 mb-4">
-            Senior Software Developer | MERN & Django | Generative AI Enthusiast
+            Senior Software Developer | Django & MERN | Generative AI Enthusiast
           </p>
           <p className="text-gray-600 mb-6">
             Passionate about building scalable, intelligent, and
