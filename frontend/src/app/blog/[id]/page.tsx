@@ -65,7 +65,7 @@ export default function BlogDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-gray-900 text-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-gray-900 text-gray-100 pb-10">
       {/* Banner Section - Full Width Gradient */}
       <div className="relative w-full mb-8">
         <div className="bg-gradient-to-r from-yellow-900 via-red-900 to-gray-900 w-full shadow-lg">
