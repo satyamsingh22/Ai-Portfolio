@@ -84,3 +84,4 @@ websockets==15.0.1
 yarl==1.20.1
 gunicorn==23.0.0
 dj-database-url==3.0.1
+whitenoise==6.10.0
