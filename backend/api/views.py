@@ -14,6 +14,9 @@ from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 from livekit import api
 import uuid
+
+import requests
+
 from rest_framework import status
 from .models import Blog, Contact
 from .serializer import BlogSerializer
@@ -206,9 +209,25 @@ class ContactCreate(ListCreateAPIView):
 
             phonenumber_id = os.getenv("PHONENUMBER_ID")
             acess_token = os.getenv("ACCESS_TOKEN")
+            to=os.getenv("TO_NUMBER")
             whatsapp_api_url = (
                 f"https://graph.facebook.com/v17.0/{phonenumber_id}/messages"
             )
+            payload = {
+                "messaging_product": "whatsapp",
+                "to": to,
+                "type": "text",
+                "text": {
+                    "body": f"New contact form submission:\nName: {name}\nEmail: {email}\nMessage: {message}"
+                },
+            }
+            headers = {
+                "Authorization": f"Bearer {acess_token}",
+                "Content-Type": "application/json",
+            }
+            response = requests.post(whatsapp_api_url, json=payload, headers=headers)
+            print("responser",response.text)
+
             return Response(
                 {"message": "Your message has been sent successfully!"},
                 status=status.HTTP_201_CREATED,

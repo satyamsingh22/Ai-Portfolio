@@ -16,6 +16,7 @@ import {
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,6 +25,8 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
+
       const res = await axios.post("http://127.0.0.1:8000/api/contact/", form);
 
       setSubmitted(true);
@@ -31,6 +34,8 @@ export default function ContactPage() {
       setForm({ name: "", email: "", message: "" });
     } catch (err) {
       console.error("Error submitting contact form:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -183,9 +188,19 @@ export default function ContactPage() {
             </div>
             <button
               type="submit"
-              className="w-full py-3 rounded-xl font-bold text-lg bg-gradient-to-r from-blue-400 to-violet-600 text-white shadow-lg hover:scale-105 transition-transform"
+              className={`w-full py-3 rounded-xl font-bold text-lg bg-gradient-to-r from-blue-400 to-violet-600 text-white shadow-lg hover:scale-105 transition-transform flex items-center justify-center ${
+                loading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
+              disabled={loading}
             >
-              Send Message
+              {loading ? (
+                <>
+                  <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent mr-2"></div>
+                  Sending...
+                </>
+              ) : (
+                "Send Message"
+              )}
             </button>
           </form>
           {submitted && (
