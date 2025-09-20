@@ -23,7 +23,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2">
               <FaEnvelope className="text-lg" />
-              <span>satyamsinghss2203@gmail.com@gmail.com</span>
+              <span>satyamsinghss2203@gmail.com</span>
             </div>
           </div>
         </div>
