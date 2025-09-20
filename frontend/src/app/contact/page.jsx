@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useState } from "react";
 import {
   FaEnvelope,
@@ -20,11 +21,17 @@ export default function ContactPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2500);
-    setForm({ name: "", email: "", message: "" });
+    try {
+      const res = await axios.post("http://127.0.0.1:8000/api/contact/", form);
+
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2500);
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error("Error submitting contact form:", err);
+    }
   };
 
   return (

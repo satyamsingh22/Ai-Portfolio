@@ -2,21 +2,20 @@
 import openai
 import os
 from rest_framework.views import APIView
-from rest_framework.generics import ListCreateAPIView,RetrieveAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 
 from rest_framework.response import Response
 from rest_framework import status
 from dotenv import load_dotenv
+
 # views.py
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 from livekit import api
-import json
-import jwt
 import uuid
 from rest_framework import status
-from .models import Blog,Voicebot
+from .models import Blog, Contact
 from .serializer import BlogSerializer
 
 load_dotenv()
@@ -83,7 +82,6 @@ RelationShip:
 """
 
 
-
 class ChatWithAI(APIView):
     def post(self, request):
         user_input = request.data.get("message", "")
@@ -137,39 +135,41 @@ AI Satyam:
             )
 
 
-
-
 @csrf_exempt
 def get_livekit_token(request):
     # Load credentials from environment variables
     api_key = os.getenv("LIVEKIT_API_KEY")
     api_secret = os.getenv("LIVEKIT_API_SECRET")
-    url = os.getenv("LIVEKIT_URL")  
+    url = os.getenv("LIVEKIT_URL")
 
     if not all([api_key, api_secret, url]):
         return JsonResponse({"error": "Missing LiveKit credentials."}, status=500)
-    
+
     call_type = request.GET.get("call_type")
-    
+
     user_identity = "user"
     room_name = uuid.uuid4().hex
     user_name = "user"
-    
+
     room_name = f"{room_name}_{call_type}"
     print(f"Room name: {room_name}")
-    token = api.AccessToken(api_key, api_secret)\
-        .with_identity(user_identity)\
-        .with_name(user_name)\
-        .with_grants(api.VideoGrants(
-            room_join=True,
-            room=room_name,
-        )).to_jwt()
+    token = (
+        api.AccessToken(api_key, api_secret)
+        .with_identity(user_identity)
+        .with_name(user_name)
+        .with_grants(
+            api.VideoGrants(
+                room_join=True,
+                room=room_name,
+            )
+        )
+        .to_jwt()
+    )
 
-    return JsonResponse({
-        "token": token,
-        "room": room_name,
-        "url": url
-    }, status=status.HTTP_200_OK)
+    return JsonResponse(
+        {"token": token, "room": room_name, "url": url}, status=status.HTTP_200_OK
+    )
+
 
 # @csrf_exempt
 # def increment_voicebot_view(request, voicebot_id):
@@ -184,12 +184,36 @@ def get_livekit_token(request):
 #     except Exception as e:
 #         return JsonResponse({"error": str(e)}, status=500)
 
+
 class BlogList(ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
 
 
-
 class BlogDetail(RetrieveAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+
+
+class ContactCreate(ListCreateAPIView):
+
+    def post(self, request):
+        try:
+            name = request.data.get("name")
+            email = request.data.get("email")
+            message = request.data.get("message")
+            Contact.objects.create(name=name, email=email, message=message)
+
+            phonenumber_id = os.getenv("PHONENUMBER_ID")
+            acess_token = os.getenv("ACCESS_TOKEN")
+            whatsapp_api_url = (
+                f"https://graph.facebook.com/v17.0/{phonenumber_id}/messages"
+            )
+            return Response(
+                {"message": "Your message has been sent successfully!"},
+                status=status.HTTP_201_CREATED,
+            )
+        except Exception as e:
+            return Response(
+                {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

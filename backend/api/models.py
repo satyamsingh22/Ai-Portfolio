@@ -13,7 +13,15 @@ class Blog(models.Model):
         return self.tittle
     
 class Voicebot(models.Model):
-    Voicebot = models.CharField(max_length=100)  
+    Voicebot = models.CharField(max_length=100)
     
     def __str__(self):
         return self.Voicebot
+    
+    
+ 
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    message = models.TextField()
+       
