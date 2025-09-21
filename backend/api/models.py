@@ -24,4 +24,16 @@ class Contact(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     message = models.TextField()
-       
+
+
+
+class DailyUpdate(models.Model):
+    title = models.CharField(max_length=100)
+    summary = models.TextField()
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to="daily_images/", null=True, blank=True)
+    
+    
+    def __str__(self):
+        return self.title

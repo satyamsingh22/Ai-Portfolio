@@ -18,8 +18,8 @@ import uuid
 import requests
 
 from rest_framework import status
-from .models import Blog, Contact
-from .serializer import BlogSerializer
+from .models import Blog, Contact , DailyUpdate
+from .serializer import BlogSerializer, DailyUpdateSerializer
 
 load_dotenv()
 
@@ -209,7 +209,7 @@ class ContactCreate(ListCreateAPIView):
 
             phonenumber_id = os.getenv("PHONENUMBER_ID")
             acess_token = os.getenv("ACCESS_TOKEN")
-            to=os.getenv("TO_NUMBER")
+            to = os.getenv("TO_NUMBER")
             whatsapp_api_url = (
                 f"https://graph.facebook.com/v17.0/{phonenumber_id}/messages"
             )
@@ -226,7 +226,7 @@ class ContactCreate(ListCreateAPIView):
                 "Content-Type": "application/json",
             }
             response = requests.post(whatsapp_api_url, json=payload, headers=headers)
-            print("responser",response.text)
+            print("responser", response.text)
 
             return Response(
                 {"message": "Your message has been sent successfully!"},
@@ -236,3 +236,13 @@ class ContactCreate(ListCreateAPIView):
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+
+class DailyUpdateList(ListCreateAPIView):
+    queryset = DailyUpdate.objects.all().order_by("-created_at")
+    serializer_class = DailyUpdateSerializer
+
+
+class DailyUpdateDetail(RetrieveAPIView):
+    queryset = DailyUpdate.objects.all()
+    serializer_class = DailyUpdateSerializer
