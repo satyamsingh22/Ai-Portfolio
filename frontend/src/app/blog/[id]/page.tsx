@@ -1,4 +1,5 @@
 "use client";
+import { API_URL } from "@/lib/api";
 import axios from "axios";
 import matter from "gray-matter";
 import { useParams } from "next/navigation";
@@ -15,7 +16,7 @@ export default function BlogDetailPage() {
   useEffect(() => {
     async function fetchBlog() {
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/api/blog/${id}/`);
+        const res = await axios.get(`${API_URL}/blog/${id}/`);
         setBlog(res.data);
       } catch (e) {
         setBlog(null);

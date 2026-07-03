@@ -8,7 +8,7 @@ const Banner: React.FC = () => {
       <div className="banner-content">
         <h1 className="banner-title">Satyam Singh</h1>
         <p className="banner-subtitle">
-          Senior Software Developer | MERN & Django | Generative AI Enthusiast
+          Senior Software Developer | AI Automation Engineer | Voice · WhatsApp · Chatbot
         </p>
         <p className="banner-desc">
           Passionate about building scalable, intelligent, and high-performance

@@ -18,14 +18,14 @@ const OVERVIEW = [
     title: "Experience",
     icon: <FaBuilding className="text-4xl text-yellow-600 mb-3" />,
     preview:
-      "Senior Software Developer at Kipps.AI and Web Developer Intern at Mediversal Pvt. Ltd.",
+      "Founding Engineer at Fawks.AI, Senior Software Developer at Kipps.AI, and Web Developer Intern at Mediversal Pvt. Ltd.",
   },
   {
     key: "education",
     title: "Education",
     icon: <FaGraduationCap className="text-4xl text-yellow-600 mb-3" />,
     preview:
-      "B.Tech in Computer Science (REC Sonbhadra), Class 12 (Ballia), Class 10 (LFCS Mau)",
+      "B.Tech in Computer Science (REC Sonbhadra, June 2025), Class 12 (Shri Hari Inter College, Ballia), Class 10 (LFCS Mau)",
   },
   {
     key: "achievements",

@@ -1,4 +1,5 @@
 "use client";
+import { API_URL } from "@/lib/api";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -109,7 +110,7 @@ export default function BlogPage() {
   const getAllBlogs = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/blog/");
+      const response = await axios.get(`${API_URL}/blog/`);
       console.log("Fetched blogs:", response.data);
       setBlogs(response.data);
     } catch (error) {

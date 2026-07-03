@@ -1,5 +1,6 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -9,7 +10,7 @@ export default function DailyUpdatesPreview() {
   const [expanded, setExpanded] = useState({});
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/dailyupdates/")
+    fetch(`${API_URL}/dailyupdates/`)
       .then((res) => res.json())
       .then(setUpdates);
   }, []);

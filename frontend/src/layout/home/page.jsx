@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const TITLES = [
-  "Full Stack Developer",
-  "Senior Software Developer",
-  "AI Integration Expert",
+  "AI Automation Engineer",
+  "Founding Engineer",
+  "Voice & Chatbot Expert",
 ];
 
 function getDaysSinceStart(startDate) {
@@ -185,17 +185,17 @@ export default function HomePage() {
           </h2>
           {/* Description */}
           <p className="text-lg text-gray-700 max-w-xl bg-white/60 rounded-xl p-4 shadow-lg border border-indigo-100">
-            I'm a{" "}
+            I'm an{" "}
             <span className="font-bold text-indigo-700">
-              Senior Software Developer
+              AI Automation Engineer
             </span>{" "}
-            working primarily with{" "}
-            <span className="font-semibold text-blue-600">Django</span>, the{" "}
-            <span className="font-semibold text-violet-600">MERN stack</span>,
             and{" "}
-            <span className="font-semibold text-indigo-700">Generative AI</span>{" "}
-            to craft scalable, intelligent, and high-performance applications
-            across web and mobile platforms.
+            <span className="font-bold text-indigo-700">Founding Engineer</span>{" "}
+            at Fawks.AI, specializing in{" "}
+            <span className="font-semibold text-violet-600">Voice Agents</span>,{" "}
+            <span className="font-semibold text-blue-600">WhatsApp Bots</span>, and{" "}
+            <span className="font-semibold text-indigo-700">AI Chatbots</span>{" "}
+            using Django, LiveKit, and modern LLM stacks.
           </p>
           {/* Buttons */}
           <div className="flex flex-col gap-4 mt-6 w-fit">

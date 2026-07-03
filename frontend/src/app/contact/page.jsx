@@ -1,5 +1,6 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import axios from "axios";
 import { useState } from "react";
 import {
@@ -11,7 +12,26 @@ import {
   FaPhone,
   FaRobot,
   FaUser,
+  FaWhatsapp,
 } from "react-icons/fa";
+
+const SPECIALIZATIONS = [
+  {
+    icon: FaMicrophoneAlt,
+    title: "Voice Agent",
+    description: "AI-powered voice assistants for real-time, human-like conversations.",
+  },
+  {
+    icon: FaWhatsapp,
+    title: "WhatsApp Agent",
+    description: "Automated WhatsApp bots for support, sales, and customer engagement.",
+  },
+  {
+    icon: FaRobot,
+    title: "Chatbot",
+    description: "Smart chatbots trained on your data for websites and business workflows.",
+  },
+];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -27,7 +47,7 @@ export default function ContactPage() {
     try {
       setLoading(true);
 
-      const res = await axios.post("http://127.0.0.1:8000/api/contact/", form);
+      const res = await axios.post(`${API_URL}/contact/`, form);
 
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 2500);
@@ -56,15 +76,15 @@ export default function ContactPage() {
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg tracking-wide mb-2 md:mb-3 text-center">
             Get In Touch
           </h1>
-          <p className="text-white text-center text-sm sm:text-base md:text-lg font-medium max-w-lg md:max-w-xl drop-shadow mb-2">
-            Have an idea, project, or just want to connect?{" "}
-            <br className="hidden md:block" />I love collaborating on innovative
-            tech, AI, and web solutions. <br />
-            Reach out for freelance work, partnerships, or a friendly chat about
-            software and AI!
+          <p className="text-white text-center text-sm sm:text-base md:text-lg font-medium max-w-lg md:max-w-2xl drop-shadow mb-2">
+            Hi, I&apos;m Satyam Singh — an AI Automation Engineer specializing in
+            Voice Agents, WhatsApp Agents, and Chatbots.
+            <br className="hidden md:block" />
+            Let&apos;s build intelligent automation that talks, chats, and converts
+            for your business.
           </p>
           <span className="inline-block mt-2 px-4 py-1 rounded-full bg-indigo-600/80 text-white font-semibold text-xs md:text-sm shadow text-center whitespace-normal">
-            Senior Developer | Generative AI | Open for Collaboration
+            AI Automation Engineer | Voice · WhatsApp · Chatbot
           </span>
         </div>
       </div>
@@ -82,15 +102,34 @@ export default function ContactPage() {
             Satyam Singh
           </h2>
           <p className="text-gray-700 mb-4">
-            Senior Software Developer | Django & MERN | Generative AI Enthusiast
+            AI Automation Engineer
           </p>
           <p className="text-gray-600 mb-6">
-            Passionate about building scalable, intelligent, and
-            high-performance applications. <br />
+            I help businesses automate customer interactions with intelligent AI
+            solutions — from voice-powered assistants to WhatsApp bots and custom
+            chatbots.
+            <br />
             <span className="font-semibold text-indigo-700">
-              Let’s connect for projects, collaborations, or just a tech chat!
+              Let&apos;s build your next AI automation together!
             </span>
           </p>
+
+          <div className="grid gap-3 w-full mb-6 text-left">
+            {SPECIALIZATIONS.map(({ icon: Icon, title, description }) => (
+              <div
+                key={title}
+                className="flex items-start gap-3 rounded-xl bg-white/70 p-3 border border-indigo-100"
+              >
+                <div className="mt-0.5 rounded-full bg-indigo-600 p-2 text-white">
+                  <Icon className="text-sm" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-indigo-700">{title}</h3>
+                  <p className="text-sm text-gray-600">{description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
 
           {/* Contact Info */}
           <div className="flex flex-col gap-2 items-center mb-4">
@@ -146,8 +185,8 @@ export default function ContactPage() {
         {/* Right Side - Contact Form */}
         <div className="bg-white/90 rounded-3xl shadow-2xl p-8 border border-indigo-100 backdrop-blur-md">
           <p className="text-lg text-gray-700 mb-8 text-center">
-            Have a question, project, or just want to say hi? Fill out the form
-            below and I'll get back to you soon!
+            Need a Voice Agent, WhatsApp Agent, or Chatbot for your business?
+            Send me a message and I&apos;ll get back to you soon!
           </p>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="relative">

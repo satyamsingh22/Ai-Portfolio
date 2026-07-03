@@ -13,14 +13,21 @@ export default function SkillsTab() {
       title: "Technologies",
       icon: <FaLaptopCode className="text-2xl text-blue-600 mr-4 mt-1" />,
       items:
-        "React, Django, NodeJS, ExpressJS, Kafka, Docker, SQL, PHP, PostgreSQL, MongoDB, RESTful APIs, Celery, Redis, Generative AI, Meta",
+        "React, Django, NodeJS, ExpressJS, Kafka, Docker, SQL, PHP, PostgreSQL, MongoDB, RESTful APIs, Celery Beat, Redis, Generative AI, LiveKit, Pinecone, LLM Models",
       gradient: "from-blue-50 via-blue-100 to-blue-200",
       border: "border-blue-400",
     },
     {
+      title: "Cloud & Automation",
+      icon: <FaLaptopCode className="text-2xl text-indigo-600 mr-4 mt-1" />,
+      items: "Google Cloud Platform (GCP), Amazon Web Services (AWS), n8n",
+      gradient: "from-indigo-50 via-indigo-100 to-indigo-200",
+      border: "border-indigo-400",
+    },
+    {
       title: "Tools",
       icon: <FaTools className="text-2xl text-green-600 mr-4 mt-1" />,
-      items: "Git, Figma, VS Code, Jira, Cursor",
+      items: "Git, Figma, Visual Studio Code, Jira, Cursor",
       gradient: "from-green-50 via-green-100 to-green-200",
       border: "border-green-400",
     },

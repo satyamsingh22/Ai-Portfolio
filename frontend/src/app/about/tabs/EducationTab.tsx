@@ -4,21 +4,21 @@ export default function EducationTab() {
   const education = [
     {
       logo: "/college.webp",
-      year: "Expected 2025",
+      year: "June 2025",
       title: "B.Tech in Computer Science & Engineering",
       place: "Rajkiya Engineering College, Sonbhadra",
     },
     {
       logo: "/school2.jpeg",
-      year: "2020",
-      title: "Class 12",
-      place: "Shri Hari Inter College, Ballia",
+      year: "March 2020",
+      title: "Senior Secondary (Class 12)",
+      place: "Shri Hari Inter College, Nanahul, Ballia",
     },
     {
       logo: "/school.jpeg",
-      year: "2017",
-      title: "Class 10",
-      place: "LFCS Mau",
+      year: "March 2017",
+      title: "Secondary (Class 10)",
+      place: "Little Flower Childrens Schools, Mau",
     },
   ];
 

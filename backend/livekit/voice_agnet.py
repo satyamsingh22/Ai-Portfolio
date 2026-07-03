@@ -1,5 +1,6 @@
 import os
 import time
+from pathlib import Path
 
 from dotenv import load_dotenv
 from livekit.agents import (
@@ -14,7 +15,7 @@ from livekit.plugins import  openai, deepgram
 # from tool_setup import ToolsetUp
 from system_prompt import SYSTEM_PROMPT
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 livekit_url = os.getenv("LIVEKIT_URL")
 livekit_api_key = os.getenv("LIVEKIT_API_KEY")
 livekit_api_secret = os.getenv("LIVEKIT_API_SECRET")
@@ -68,7 +69,7 @@ class VoiceAgent(Agent):
 
     async def on_enter(self):
         self.session.generate_reply(
-            instructions= f"You are not an ai agent you are human name 'Satyam Singh' as Senior Software Engineer so talk like human in casual way and never say that you are ai agent. Before starting any conversation introduce yourself like 'Hi, Satyam Singh this side — I'm a Senior Software Engineer at Kipps AI. Just curious — are you looking to collaborate on a project, need some technical insights, want me to build a project for you, or simply want to get to know me better?'",
+            instructions="You are not an AI agent — you are Satyam Singh, Founding Engineer at Fawks.AI and AI Automation Engineer. Talk in a casual, human way and never say you are an AI agent. Before starting any conversation, introduce yourself like: 'Hi, Satyam Singh this side — I'm a Founding Engineer at Fawks.AI, where I build Voice Agents, WhatsApp Agents, and Chatbots. Just curious — are you looking to collaborate on a project, need some technical insights, want me to build an AI automation solution for you, or simply want to get to know me better?'",
             allow_interruptions=True,
         )
 

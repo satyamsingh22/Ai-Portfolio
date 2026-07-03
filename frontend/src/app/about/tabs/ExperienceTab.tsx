@@ -7,35 +7,54 @@ export default function ExperienceTab() {
 
   const experiences = [
     {
+      name: "Fawks.AI",
+      role: "Founding Engineer, Remote",
+      duration: "April 2026 – Present",
+      link: "https://fawks.ai/",
+      logo: "/logo2.png",
+      gradient: "from-violet-50 via-indigo-50 to-indigo-100",
+      border: "border-indigo-400",
+      highlights: [
+        "Built an AI-powered Voice, Chat, and WhatsApp automation platform from scratch using Django, Redis, Celery, LiveKit, Qdrant, and Meta WhatsApp APIs.",
+        "Developed scalable VoiceBot systems using LiveKit for real-time, two-way voice communication.",
+        "Implemented a knowledge base using Qdrant for semantic search and intelligent response generation.",
+        "Built WhatsApp automation agents using Meta APIs for lead handling and automated customer interactions.",
+        "Designed a campaign automation engine for lead nurturing, outreach, and conversion workflows.",
+        "Led product ideation, market research, and problem-solving to deliver business-focused solutions.",
+        "Deployed and scaled applications on GCP and Docker ensuring high availability and performance.",
+      ],
+    },
+    {
       name: "Kipps.AI",
-      role: "Senior Software Developer, Udaipur",
-      duration: "Feb 2025 – Present",
+      role: "Senior Software Developer, Udaipur, Rajasthan",
+      duration: "Feb 2025 – April 2026",
       link: "https://www.kipps.ai/",
       logo: "/kipps.jpeg",
       gradient: "from-yellow-50 via-yellow-100 to-yellow-200",
       border: "border-yellow-400",
       highlights: [
-        "Building and integrating intelligent chatbots trained on custom data for client-specific use cases.",
-        "Developed seamless chatbot embedding into websites and implemented WhatsApp integration using Meta’s API.",
-        "Designed and implemented WhatsApp signup embedding for smooth user onboarding directly via WhatsApp.",
-        "Built a WhatsApp Agent from scratch, capable of handling real-time customer queries and automations.",
-        "Leveraged Celery, Django, Redis, and OpenAI for background processing and AI-powered conversations.",
-        "Collaborated within a TypeScript + Python stack to deliver scalable, real-time chatbot solutions.",
+        "Contributed to the development of an advanced VoiceBot system using LiveKit for real-time, two-way voice communication.",
+        "Worked on intelligent ChatBot solutions using Pinecone to automate client interactions and improve response accuracy.",
+        "Built a Meta WhatsApp Agent powered by a centralized Knowledge Base for automated replies, lead handling, and campaign execution.",
+        "Collaborated on the design and enhancement of a Campaign System for WhatsApp and VoiceBot leads.",
+        "Implemented automation workflows using n8n for lead processing, campaign scheduling, and CRM synchronization.",
+        "Deployed and scaled applications on Google Cloud Platform (GCP) for high availability and performance.",
+        "Worked with multiple LLM models (OpenAI, Anthropic, Gemini, Mistral) for diverse client use cases.",
       ],
     },
     {
       name: "Mediversal Pvt. Ltd.",
-      role: "Web Developer Intern, Patna",
-      duration: "Aug 2024 – Jan 2025",
+      role: "Web Developer Intern, Patna, Bihar",
+      duration: "August 2024 – January 2025",
       link: "https://www.mediversal.in/",
       logo: "/mediversal.png",
       gradient: "from-blue-50 via-blue-100 to-blue-200",
       border: "border-blue-400",
       highlights: [
-        "Developed full-stack web applications including LMS, lab report management, loyalty systems and more, from scratch.",
-        "Designed and implemented secure OTP-based authentication systems for user verification.",
-        "Managed complete development cycle – frontend, backend, and database integration for scalable solutions.",
-        "Collaborated with cross-functional teams to deploy and optimize production-ready web applications.",
+        "Developed LMS, lab report management, 2nd Inning, and loyalty systems from scratch using React, Next.js, Node.js, Express, and Twilio.",
+        "Worked on full-stack development, handling frontend, backend, and database integration.",
+        "Implemented OTP-based authentication systems to ensure secure and seamless user login and verification.",
+        "Collaborated with cross-functional teams to design and deploy scalable web applications.",
       ],
     },
     {
@@ -47,7 +66,7 @@ export default function ExperienceTab() {
       gradient: "from-green-50 via-green-100 to-green-200",
       border: "border-green-400",
       highlights: [
-        "Developed a complete research lab website for IIIT Delhi’s VLSI Circuits & Systems Lab from scratch.",
+        "Developed a complete research lab website for IIIT Delhi's VLSI Circuits & Systems Lab from scratch.",
         "Implemented team onboarding, publications management, and an admin dashboard for easy content updates.",
         "Built backend using Django ORM for efficient database operations and relational mapping.",
         "Deployed the project on Render, ensuring smooth hosting and scalability.",
@@ -73,7 +92,7 @@ export default function ExperienceTab() {
   return (
     <div className="space-y-8">
       {experiences.map((exp, index) => {
-        if (index > 1 && !showMore) return null; // Hide extra experiences initially
+        if (index > 2 && !showMore) return null;
         return (
           <motion.div
             key={index}
@@ -93,7 +112,6 @@ export default function ExperienceTab() {
                 {exp.name}
               </div>
               <div className="text-gray-500 text-sm mb-1">{`(${exp.duration})`}</div>
-              {/* Website link below the year */}
               <a
                 href={exp.link}
                 target="_blank"
@@ -113,7 +131,6 @@ export default function ExperienceTab() {
         );
       })}
 
-      {/* Read More / Show Less Button */}
       <div className="flex justify-end">
         <button
           onClick={() => setShowMore(!showMore)}
