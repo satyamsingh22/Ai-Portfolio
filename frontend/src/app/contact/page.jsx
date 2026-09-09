@@ -78,11 +78,17 @@ export default function ContactPage() {
           </h1>
           <p className="text-white text-center text-sm sm:text-base md:text-lg font-medium max-w-lg md:max-w-2xl drop-shadow mb-2">
             Hi, I&apos;m Satyam Singh — an AI Automation Engineer specializing in
-            Voice Agents, WhatsApp Agents, and Chatbots.
+            Voice Agents, WhatsApp Agents, and Chatbots. Explore our development team
+            and project portfolio with Mridul Mishra (Flutter, 5M+ user apps).
             <br className="hidden md:block" />
-            Let&apos;s build intelligent automation that talks, chats, and converts
-            for your business.
+            Let&apos;s build intelligent automation and mobile products for your business.
           </p>
+          <a
+            href="/team"
+            className="inline-block mt-3 px-4 py-1.5 rounded-full bg-emerald-600/90 text-white font-semibold text-xs md:text-sm shadow hover:bg-emerald-700 transition"
+          >
+            View Team Profiles →
+          </a>
           <span className="inline-block mt-2 px-4 py-1 rounded-full bg-indigo-600/80 text-white font-semibold text-xs md:text-sm shadow text-center whitespace-normal">
             AI Automation Engineer | Voice · WhatsApp · Chatbot
           </span>

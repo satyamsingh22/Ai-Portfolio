@@ -58,7 +58,7 @@ export default function ExperienceTab() {
       ],
     },
     {
-      name: "Freelancer (IIIT Delhi)",
+      name: "IIIT Delhi",
       role: "Full-Stack Developer (Website Project)",
       duration: "Jun 2024 – Aug 2024",
       link: "https://www.iiitd.ac.in/",
@@ -74,7 +74,7 @@ export default function ExperienceTab() {
     },
     {
       name: "FV Salon Academy",
-      role: "Web Developer (Freelance)",
+      role: "Web Developer (Project)",
       duration: "Jul 2024 – Aug 2024",
       link: "https://www.fvsalonacademy.com/",
       logo: "/f.png",

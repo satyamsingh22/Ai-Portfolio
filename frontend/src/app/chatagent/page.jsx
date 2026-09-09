@@ -1,7 +1,9 @@
 "use client";
 
 import { API_URL } from "@/lib/api";
-import { useEffect, useRef, useState } from "react";
+import { agentQuery, resolveAgentProfile } from "@/lib/agentProfiles";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   FaMicrophoneAlt,
   FaRobot,
@@ -11,16 +13,6 @@ import {
 } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 import { HiSparkles } from "react-icons/hi2";
-
-const SUGGESTIONS = [
-  "What AI automation services do you offer?",
-  "Tell me about your Voice Agent experience",
-  "What is your experience at Fawks.AI?",
-  "What tech stack do you specialize in?",
-];
-
-const WELCOME_MESSAGE =
-  "Hello! I'm AI Satyam — your intelligent assistant built on Satyam Singh's professional profile. Ask me about AI automation, voice agents, WhatsApp bots, chatbots, projects, or work experience.";
 
 function TypingIndicator() {
   return (
@@ -32,7 +24,7 @@ function TypingIndicator() {
   );
 }
 
-function MessageBubble({ message, isUser, isLoading }) {
+function MessageBubble({ message, isUser, isLoading, assistantLabel }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -60,7 +52,7 @@ function MessageBubble({ message, isUser, isLoading }) {
       </div>
       <div className="flex-1 min-w-0 max-w-[85%]">
         <div className="flex items-center gap-2 mb-1.5">
-          <span className="text-xs font-semibold text-slate-700">AI Satyam</span>
+          <span className="text-xs font-semibold text-slate-700">{assistantLabel}</span>
           {isLoading && (
             <span className="text-xs text-slate-400">typing...</span>
           )}
@@ -86,7 +78,12 @@ function MessageBubble({ message, isUser, isLoading }) {
   );
 }
 
-export default function ChatAgentPage() {
+function ChatAgentInner() {
+  const searchParams = useSearchParams();
+  const agent = useMemo(
+    () => resolveAgentProfile(searchParams.get("profile")),
+    [searchParams]
+  );
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -96,6 +93,11 @@ export default function ChatAgentPage() {
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
+
+  useEffect(() => {
+    setMessages([]);
+    setInput("");
+  }, [agent.key]);
 
   const sendMessage = async (text) => {
     const userMessage = text.trim();
@@ -109,7 +111,7 @@ export default function ChatAgentPage() {
       const res = await fetch(`${API_URL}/chat/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({ message: userMessage, profile: agent.key }),
       });
       const data = await res.json();
 
@@ -168,10 +170,10 @@ export default function ChatAgentPage() {
             </div>
             <div className="min-w-0">
               <h1 className="text-lg font-semibold text-slate-900 tracking-tight">
-                AI Satyam
+                {agent.assistantLabel}
               </h1>
               <p className="text-sm text-slate-500 truncate">
-                AI Automation Engineer · Voice · WhatsApp · Chatbot
+                {agent.role}
               </p>
             </div>
           </div>
@@ -196,10 +198,10 @@ export default function ChatAgentPage() {
                   How can I help you today?
                 </h2>
                 <p className="text-sm text-slate-500 max-w-md leading-relaxed mb-8">
-                  {WELCOME_MESSAGE}
+                  {agent.welcome}
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full max-w-lg">
-                  {SUGGESTIONS.map((suggestion) => (
+                  {agent.suggestions.map((suggestion) => (
                     <button
                       key={suggestion}
                       onClick={() => sendMessage(suggestion)}
@@ -218,6 +220,7 @@ export default function ChatAgentPage() {
                     message={msg}
                     isUser={msg.sender === "user"}
                     isLoading={false}
+                    assistantLabel={agent.assistantLabel}
                   />
                 ))}
                 {loading && (
@@ -225,6 +228,7 @@ export default function ChatAgentPage() {
                     message={{ text: "" }}
                     isUser={false}
                     isLoading
+                    assistantLabel={agent.assistantLabel}
                   />
                 )}
               </>
@@ -241,7 +245,7 @@ export default function ChatAgentPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask about my skills, projects, or AI automation services..."
+                placeholder={agent.chatPlaceholder}
                 disabled={loading}
                 className="w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3.5 pr-14 text-[15px] text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 shadow-sm disabled:opacity-60 transition-all"
               />
@@ -254,7 +258,7 @@ export default function ChatAgentPage() {
               </button>
             </form>
             <p className="text-[11px] text-slate-400 text-center mt-2.5">
-              AI Satyam can make mistakes. Verify important information.
+              {agent.chatDisclaimer}
             </p>
           </div>
         </div>
@@ -262,18 +266,18 @@ export default function ChatAgentPage() {
         {/* Quick links */}
         <div className="flex flex-wrap justify-center gap-3 mt-4">
           <a
-            href="/voiceagent"
+            href={`/voiceagent${agentQuery(agent.key)}`}
             className="inline-flex items-center gap-2 text-xs font-medium text-slate-600 bg-white border border-slate-200/80 hover:border-indigo-300 hover:text-indigo-600 px-3.5 py-2 rounded-full transition-colors shadow-sm"
           >
             <FaMicrophoneAlt className="text-indigo-500" />
             Try Voice Agent
           </a>
           <a
-            href="/contact"
+            href={agent.hireHref}
             className="inline-flex items-center gap-2 text-xs font-medium text-slate-600 bg-white border border-slate-200/80 hover:border-indigo-300 hover:text-indigo-600 px-3.5 py-2 rounded-full transition-colors shadow-sm"
           >
             <FaWhatsapp className="text-emerald-500" />
-            Hire for Automation
+            {agent.hireLabel}
           </a>
         </div>
       </div>
@@ -321,5 +325,19 @@ export default function ChatAgentPage() {
         }
       `}</style>
     </section>
+  );
+}
+
+export default function ChatAgentPage() {
+  return (
+    <Suspense
+      fallback={
+        <section className="min-h-[calc(100vh-80px)] bg-slate-50 flex items-center justify-center text-slate-500">
+          Loading chat...
+        </section>
+      }
+    >
+      <ChatAgentInner />
+    </Suspense>
   );
 }

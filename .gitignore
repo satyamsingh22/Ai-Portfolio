@@ -1,24 +1,126 @@
-# OS
+# --- OS ---
 .DS_Store
+.DS_Store?
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# Editors / IDE
+# --- Editors / IDE ---
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
+.project
+.settings/
 
-# Logs
+# --- Secrets & env ---
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+!**/.env.example
+
+# Credentials
+*.pem
+*.key
+*.p12
+google_speech.json
+credentials.json
+service-account*.json
+
+# --- Logs ---
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+pip-log.txt
 
-# Environment (never commit secrets)
-.env
-.env.local
-.env.*.local
+# --- Python / Django ---
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+develop-eggs/
+downloads/
+eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+MANIFEST
+.installed.cfg
 
-# Keep example env templates
-!.env.example
+# Virtualenvs
+venv/
+.venv/
+env/
+ENV/
+backend/venv/
+
+# Django local runtime
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+staticfiles/
+media/uploads/
+
+# Testing / coverage (Python)
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Type checkers
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Jupyter / Celery
+.ipynb_checkpoints
+celerybeat-schedule
+celerybeat.pid
+
+# --- Node / Next.js ---
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.next/
+out/
+.turbo/
+.vercel
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# --- LiveKit / local agent ---
+*.pid
+
+# --- Misc ---
+*.local
+.cache/
+tmp/
+temp/

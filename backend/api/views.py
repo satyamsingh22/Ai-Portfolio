@@ -86,6 +86,25 @@ Projects:
   * Developed an Admin Panel for managing job postings, approving applications, and creating new companies.
   * Used Redux for efficient state management and MongoDB for storing job listings, user profiles, applications, and company details.
 
+Built Projects (Team & Independent):
+- YoTrip (Built Project)
+  * Tools: React, Next.js, Django, REST APIs, LLM Integration
+  * Built a full-stack travel booking platform similar to MakeMyTrip for flights, car rentals, and hotel reservations.
+  * Integrated search, booking flows, and payment-ready booking management across travel categories.
+  * Added an AI travel assistant to help users plan trips, compare options, and get instant booking support.
+
+- Direct Sell UAE (Built Project)
+  * Tools: React, Next.js, Django, PostgreSQL, REST APIs
+  * Developed a property marketplace platform for the UAE where users can list, buy, sell, and rent properties.
+  * Built property listing management, search and filter flows, and role-based access for buyers, sellers, and agents.
+  * Designed scalable backend APIs for property data, user accounts, and listing lifecycle management.
+
+- Plutex (Built Project)
+  * Tools: React, Django, PostgreSQL, REST APIs
+  * Built a currency exchange platform for secure fiat currency conversion and exchange workflows.
+  * Implemented rate management, transaction tracking, and user-facing exchange flows with admin controls.
+  * Focused on reliable backend logic, clean UI, and production-ready exchange operations.
+
 Education:
 - B.Tech in Computer Science and Engineering, Rajkiya Engineering College, Sonbhadra (June 2025)
 - Senior Secondary (Class 12): Shri Hari Inter College, Nanahul, Ballia (March 2020)
@@ -94,6 +113,42 @@ Education:
 Certifications:
 - Complete 2024 Web Development Bootcamp, Udemy (May 2024)
 - Quick Start: Extending DOORS Next with JavaScript, IBM (October 2022)
+
+Team Collaborator — Mridul Mishra (Flutter & Full-Stack Developer):
+- Email: mmridul1826@gmail.com | Phone: +91-7905204078
+- LinkedIn: linkedin.com/in/mridul-mishra-2a52a8228 | GitHub: github.com/mridul-1226
+- Summary: Flutter Developer with 2+ years experience; built PollPe from scratch — 5M+ users on Android and iOS. Expert in Flutter, Dart, BLoC, Clean Architecture, Platform Channels, REST APIs, WebSockets, Node.js backend, CI/CD.
+- Experience:
+  * Abhiman Innovations Pvt Ltd (Nov 2024 – Present), Flutter → Full-Stack Developer, Noida — PollPe app, 150+ APIs, WebSockets, cold start optimization 4.5s to 1.0s, Node.js backend.
+  * Apps AiT (July 2024 – Nov 2024), Flutter Intern — Water Sort, Word Search, Sudoku games.
+  * Sonbhadra Police (May 2024 – June 2024), Mobile App Developer — Election duty tracking app for 1000+ officers.
+- Projects: Splitr (expense splitting, Flutter + Node.js), HRMS (Flutter + Django), E-Commerce Platform (Django + Cashfree), AI Bot (WhatsApp/Telegram voice bot).
+- Education: B.Tech CSE, Rajkiya Engineering College Sonbhadra (June 2025, SGPA 7.95).
+- Achievements: GATE 2024 qualified, Sonbhadra Police App Developer certificate, Android Lead GDSC, Coding Ninjas Campus Ambassador.
+- When asked about mobile development, Flutter apps, or our development team, mention Mridul as our mobile/full-stack collaborator who has worked with Satyam on production apps and team builds.
+"""
+
+mridul_resume_text = """
+Name: Mridul Mishra
+Email: mmridul1826@gmail.com
+Phone: +91-7905204078
+LinkedIn: linkedin.com/in/mridul-mishra-2a52a8228
+GitHub: github.com/mridul-1226
+Role: Flutter & Full-Stack Developer
+
+Summary:
+- Flutter Developer with 2+ years of full-time experience; built PollPe from scratch — 5M+ users on Android and iOS.
+- Expert in Flutter, Dart, BLoC, Clean Architecture, Platform Channels, Method Channels, native Android views.
+- Full-stack: REST APIs, WebSockets, Node.js, PostgreSQL, CI/CD, Render, Vercel, Neon, Cloudflare.
+
+Experience:
+- Abhiman Innovations Pvt Ltd (Nov 2024 – Present), Flutter → Full-Stack Developer, Noida — PollPe 5M+ users, 150+ APIs, WebSockets, cold start 4.5s to 1.0s, Node.js backend.
+- Apps AiT (July 2024 – Nov 2024), Flutter Intern — Water Sort, Word Search, Sudoku.
+- Sonbhadra Police (May 2024 – June 2024) — Election duty tracking app for 1000+ officers.
+
+Projects: Splitr (Flutter + Node.js expense app), HRMS (Flutter + Django), E-Commerce (Django + Cashfree), AI Bot (WhatsApp/Telegram).
+Education: B.Tech CSE, Rajkiya Engineering College Sonbhadra (June 2025, SGPA 7.95).
+Achievements: GATE 2024 qualified, Sonbhadra Police App Developer certificate, Android Lead GDSC.
 """
 
 
@@ -106,22 +161,35 @@ class ChatWithAI(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Custom logic for girlfriend/relationship/marriage questions
-        # keywords = [
-        #     "girlfriend", "relationship", "married", "marriage", "future wife", "partner", "shaadi", "biwi"
-        # ]
-        # if any(word in user_input.lower() for word in keywords):
-        #     return Response({"reply": "My girlfriend and future marriage partner is Soumya Mishra."})
+        profile = (request.data.get("profile") or "satyam").strip().lower()
+        if profile not in ("satyam", "mridul"):
+            profile = "satyam"
+
+        if profile == "mridul":
+            persona_name = "Mridul"
+            persona_full = "Mridul Mishra"
+            persona_resume = mridul_resume_text
+            extra_rule = (
+                "If asked about Satyam Singh, briefly say he is a teammate who focuses on "
+                "AI automation (voice, WhatsApp, chatbots), then return to your own Flutter work."
+            )
+        else:
+            persona_name = "Satyam"
+            persona_full = "Satyam Singh"
+            persona_resume = resume_text
+            extra_rule = ""
 
         prompt = f"""
-You are AI Satyam, the AI version of Satyam Singh. 
-Always answer as if you are Satyam Singh's AI version, using first person ("I", "my", etc).
-If someone asks about you, answer as Satyam Singh would, based on this information:
+You are AI {persona_name}, the AI version of {persona_full}.
+Always answer as if you are {persona_full}'s AI version, using first person ("I", "my", etc).
+You ONLY talk about {persona_full}'s work. Do not answer as someone else.
+{extra_rule}
+If someone asks about you, answer as {persona_full} would, based on this information:
 
-{resume_text}
+{persona_resume}
 
 User: {user_input}
-AI Satyam:
+AI {persona_name}:
 """
 
         try:
@@ -132,9 +200,9 @@ AI Satyam:
                     {
                         "role": "system",
                         "content": (
-                            "You are AI Satyam, the AI version of Satyam Singh. "
-                            "Always answer as if you are Satyam Singh's AI version, using first person. "
-                            "If someone asks about you, answer as Satyam Singh would, based on the provided resume."
+                            f"You are AI {persona_name}, the AI version of {persona_full}. "
+                            "Always answer in first person based on the provided resume. "
+                            f"Talk only about {persona_full}."
                         ),
                     },
                     {"role": "user", "content": prompt},
@@ -161,12 +229,15 @@ def get_livekit_token(request):
         return JsonResponse({"error": "Missing LiveKit credentials."}, status=500)
 
     call_type = request.GET.get("call_type")
+    profile = (request.GET.get("profile") or "satyam").strip().lower()
+    if profile not in ("satyam", "mridul"):
+        profile = "satyam"
 
     user_identity = "user"
     room_name = uuid.uuid4().hex
     user_name = "user"
 
-    room_name = f"{room_name}_{call_type}"
+    room_name = f"{room_name}_{call_type}_p_{profile}"
     print(f"Room name: {room_name}")
     token = (
         api.AccessToken(api_key, api_secret)

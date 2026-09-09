@@ -1,0 +1,175 @@
+export const MRIDUL_PROFILE = {
+  name: "Mridul Mishra",
+  role: "Flutter & Full-Stack Developer",
+  tagline: "Built PollPe from scratch — 5M+ users on Android & iOS",
+  email: "mmridul1826@gmail.com",
+  phone: "+91-7905204078",
+  linkedin: "https://linkedin.com/in/mridul-mishra-2a52a8228",
+  github: "https://github.com/mridul-1226",
+  image: "/mridul.png",
+  summary: [
+    "Flutter Developer with 2+ years of full-time experience, solely responsible for building PollPe from scratch — a production app serving 5M+ users on both Android and iOS.",
+    "Deep expertise in Flutter, Dart, BLoC, and Clean Architecture; experienced with Platform Channels, Method Channels, and native Android view integration.",
+    "Full-stack exposure: REST APIs, WebSockets, database modelling, indexing, transactions, query optimization, and app-level localization on Flutter and Node.js.",
+    "Production deployment using Render, Vercel, Neon, and Cloudflare including CI/CD pipelines, DNS management, and environment configuration.",
+  ],
+  skills: {
+    Flutter: [
+      "Dart",
+      "BLoC",
+      "Clean Architecture",
+      "Platform Channels",
+      "Method Channels",
+      "Native Android Views",
+      "REST APIs",
+      "WebSockets",
+      "Deep Linking",
+      "Push Notifications",
+      "Localization",
+      "CI/CD",
+    ],
+    Backend: ["Node.js (Production)", "Django REST Framework", "JWT", "Docker"],
+    Databases: ["PostgreSQL", "Firebase Firestore", "Neon (Serverless Postgres)"],
+    "Deployment & Cloud": ["Render", "Vercel", "Cloudflare (DNS, Domains)", "CI/CD Basics"],
+    Tools: ["Git", "Android Studio", "VS Code", "Postman", "Figma"],
+  },
+  experience: [
+    {
+      company: "Abhiman Innovations Pvt Ltd",
+      location: "Noida",
+      role: "Flutter Developer → Full-Stack Developer",
+      duration: "Nov 2024 – Present",
+      links: { playStore: true, appStore: true },
+      highlights: [
+        "Flutter developer for PollPe (5M+ users) — built the entire mobile application from scratch for Android and iOS using BLoC and Clean Architecture.",
+        "Implemented Platform Channels and Method Channels to bridge Flutter with native Android code; embedded native Android views for platform-specific UI.",
+        "Integrated 150+ REST APIs and WebSocket-based real-time polling with robust error handling, retry logic, and optimized state management.",
+        "Reduced app cold start time from ~4.5s to ~1.0s via deferred initialization, lazy loading, and asset optimization.",
+        "Expanded to backend (Node.js): API development, WebSocket services, database modelling, and query-level performance optimization.",
+        "Managed production releases, hotfixes, crash triage, and feature rollouts across both platforms.",
+      ],
+    },
+    {
+      company: "Apps AiT",
+      location: "Remote",
+      role: "Flutter Intern",
+      duration: "July 2024 – Nov 2024",
+      highlights: [
+        "Developed multiple games — Water Sort, Word Search, Sudoku.",
+        "Created and optimized animated designs for multiple games.",
+        "Applied BLoC state management for predictable performance and smooth gameplay.",
+      ],
+    },
+    {
+      company: "Sonbhadra Police",
+      location: "Sonbhadra",
+      role: "Mobile Application Developer",
+      duration: "May 2024 – June 2024",
+      highlights: [
+        "Built and delivered an official app for police officers during Lok Sabha Election 2024 for duty and accommodation tracking.",
+        "Used by more than 1000 officers; awarded certificate from the police department.",
+      ],
+    },
+  ],
+  projects: [
+    {
+      name: "Splitr",
+      subtitle: "Expense Splitting App for Indian Users (Splitwise Alternative)",
+      duration: "May 2026 – Present",
+      tags: ["Flutter", "BLoC", "Node.js", "PostgreSQL", "Render", "Brevo", "AdMob", "FCM", "GitHub Actions"],
+      highlights: [
+        "Full-stack expense splitting app with group management, nudge/notify via FCM, and OTP auth via Brevo.",
+        "Clean BLoC architecture on Flutter with Node.js REST backend on PostgreSQL, deployed on Render.",
+        "AdMob interstitial ads on high-intent actions; UPI intent integration, PDF/Excel exports, and spend analytics.",
+        "End-to-end CI/CD with GitHub Actions — automated Flutter signing and Firebase App Distribution.",
+      ],
+    },
+    {
+      name: "HRMS",
+      subtitle: "Human Resource Management System – Mobile + Admin Panel",
+      duration: "Sept 2024 – Jan 2025",
+      tags: ["Flutter", "Django REST Framework", "JWT", "OAuth2", "RBAC", "PostgreSQL"],
+      highlights: [
+        "Full-stack HRMS with JWT + OAuth2 authentication and role-based access for Admin and Employee.",
+        "Admin workflows: employee management, leave policies, approval chains, and secure CRUD APIs.",
+      ],
+    },
+    {
+      name: "E-Commerce Platform",
+      subtitle: "Production Backend with Payments, Auth & Deployment",
+      duration: "Dec 2025 – Jan 2026",
+      tags: ["Django REST Framework", "PostgreSQL", "Render", "Vercel", "Cloudflare", "Cashfree", "CI/CD"],
+      highlights: [
+        "Complete backend: product catalog, cart, order management, and transactional REST APIs.",
+        "Cashfree payment gateway and OTP-based authentication for end-to-end purchase flows.",
+        "CI/CD with Render and Vercel; PostgreSQL on Neon and custom domain via Cloudflare.",
+      ],
+    },
+    {
+      name: "AI Bot",
+      subtitle: "WhatsApp & Telegram Automation with Voice Support",
+      duration: "Aug 2025 – Sept 2025",
+      tags: ["Django", "Twilio WhatsApp API", "Telegram Webhook", "Google STT", "gTTS", "Cloudinary"],
+      highlights: [
+        "AI-powered bot for WhatsApp and Telegram with real-time text and voice interactions.",
+        "Google Speech-to-Text, gTTS, and webhook messaging with sub-3s end-to-end response time.",
+      ],
+    },
+  ],
+  education: [
+    {
+      degree: "B.Tech, Computer Science and Engineering",
+      school: "Rajkiya Engineering College, Sonbhadra",
+      year: "June 2025",
+      detail: "SGPA: 7.95",
+    },
+    {
+      degree: "Senior Secondary (Class 12)",
+      school: "St. Johns School, ICSE Board",
+      year: "March 2020",
+      detail: "Percentage: 82.4%",
+    },
+    {
+      degree: "Secondary (Class 10)",
+      school: "St. Johns School, ICSE Board",
+      year: "March 2018",
+      detail: "Percentage: 80.5%",
+    },
+  ],
+  achievements: [
+    "App Developer Certificate, Sonbhadra Police — June 2024",
+    "Qualified GATE 2024 — Score: 456, Rank: 7815",
+    "Android Lead, Google Developer Students Club — Sept 2023 – May 2024",
+    "Campus Ambassador, Coding Ninjas Club — Nov 2023 – May 2024",
+  ],
+  codingProfiles: ["LeetCode", "GFG", "Coding Ninjas"],
+};
+
+export const SATYAM_TEAM_SUMMARY = {
+  name: "Satyam Singh",
+  role: "AI Automation Engineer & Founding Engineer",
+  tagline: "Voice Agents, WhatsApp Bots, Chatbots & AI Automation",
+  href: "/about",
+  image: "/profile.png",
+  initials: "SS",
+  skills: ["Voice Agents", "WhatsApp Bots", "LiveKit", "Django"],
+  highlights: [
+    "Founding Engineer at Fawks.AI — Voice, Chat & WhatsApp automation platform",
+    "LiveKit voice agents, Sarvam STT/TTS, multilingual AI (Hindi, English, Tamil, Bengali)",
+    "Team builds: YoTrip, Direct Sell UAE, Plutex + full-stack Django/React projects",
+  ],
+};
+
+export const MRIDUL_TEAM_SUMMARY = {
+  name: "Mridul Mishra",
+  role: "Flutter & Full-Stack Developer",
+  tagline: "Built PollPe from scratch — 5M+ users on Android & iOS",
+  href: "/team/mridul",
+  image: "/mridul.png",
+  skills: ["Flutter", "BLoC", "Node.js", "PostgreSQL"],
+  highlights: [
+    "Sole Flutter developer for PollPe — 5M+ users on Android and iOS",
+    "150+ REST APIs, WebSockets, and cold start cut from 4.5s to 1.0s",
+    "Full-stack: Node.js, PostgreSQL, CI/CD, Splitr, HRMS, and production deploys",
+  ],
+};

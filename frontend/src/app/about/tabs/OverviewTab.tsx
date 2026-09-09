@@ -21,6 +21,13 @@ const OVERVIEW = [
       "Founding Engineer at Fawks.AI, Senior Software Developer at Kipps.AI, and Web Developer Intern at Mediversal Pvt. Ltd.",
   },
   {
+    key: "projects",
+    title: "Projects",
+    icon: <FaCode className="text-4xl text-yellow-600 mb-3" />,
+    preview:
+      "Team builds: YoTrip, Direct Sell UAE, Plutex — plus personal projects in AI, social, and job platforms.",
+  },
+  {
     key: "education",
     title: "Education",
     icon: <FaGraduationCap className="text-4xl text-yellow-600 mb-3" />,

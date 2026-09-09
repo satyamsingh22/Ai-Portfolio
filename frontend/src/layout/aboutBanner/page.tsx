@@ -1,11 +1,12 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaUser, FaBriefcase, FaGraduationCap, FaTrophy, FaTools } from "react-icons/fa";
+import { FaUser, FaBriefcase, FaGraduationCap, FaTrophy, FaTools, FaProjectDiagram } from "react-icons/fa";
 
 const BOXES = [
   { title: "Overview", key: "overview", icon: <FaUser size={32} className="text-[#8B0000]" /> },
   { title: "Experience", key: "experience", icon: <FaBriefcase size={32} className="text-[#C68642]" /> },
+  { title: "Projects", key: "projects", icon: <FaProjectDiagram size={32} className="text-[#2563EB]" /> },
   { title: "Education", key: "education", icon: <FaGraduationCap size={32} className="text-[#DEB887]" /> },
   { title: "Achievements", key: "achievements", icon: <FaTrophy size={32} className="text-[#FFD700]" /> },
   { title: "Skills", key: "skills", icon: <FaTools size={32} className="text-[#4B3F2F]" /> },

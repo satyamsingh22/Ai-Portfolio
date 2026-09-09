@@ -1,6 +1,7 @@
 "use client";
 
 import { API_URL } from "@/lib/api";
+import { agentQuery, resolveAgentProfile } from "@/lib/agentProfiles";
 import {
   LiveKitRoom,
   RoomAudioRenderer,
@@ -10,7 +11,8 @@ import {
   useVoiceAssistant,
 } from "@livekit/components-react";
 import { createLocalAudioTrack } from "livekit-client";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   FaMicrophoneAlt,
   FaMicrophoneSlash,
@@ -27,8 +29,8 @@ const FEATURES = [
     desc: "Talk naturally with an AI powered by LiveKit & GPT-4o",
   },
   {
-    title: "Human-like Responses",
-    desc: "Get instant spoken answers about skills, projects & experience",
+    title: "Hindi · English · Tamil · Bengali",
+    desc: "Speak in any of these languages — the agent detects and replies in yours",
   },
   {
     title: "Secure & Private",
@@ -83,7 +85,7 @@ function AudioWaveform({ color = "indigo", active }) {
   );
 }
 
-function ConnectingToSatyam() {
+function ConnectingToAgent({ agent }) {
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-6 py-10 text-center">
       <div className="relative flex items-center justify-center w-44 h-44 mb-8">
@@ -91,11 +93,11 @@ function ConnectingToSatyam() {
         <span className="connect-ring connect-ring-2" />
         <span className="connect-ring connect-ring-3" />
         <div className="relative z-10 w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-xl ring-2 ring-amber-100">
-          <img src="/logo2.png" alt="Satyam" className="w-full h-full object-cover" />
+          <img src={agent.avatar} alt={agent.shortName} className="w-full h-full object-cover" />
         </div>
       </div>
       <h2 className="text-xl font-semibold text-slate-900 mb-2">
-        Connecting to Satyam
+        {agent.connectingTitle}
         <span className="connecting-dots" />
       </h2>
       <p className="text-sm text-slate-500 max-w-xs">
@@ -108,7 +110,7 @@ function ConnectingToSatyam() {
   );
 }
 
-function VoiceVisualizer({ userSpeaking, assistantSpeaking, micOn }) {
+function VoiceVisualizer({ userSpeaking, assistantSpeaking, micOn, agent }) {
   const mode = assistantSpeaking
     ? "assistant"
     : userSpeaking
@@ -149,7 +151,7 @@ function VoiceVisualizer({ userSpeaking, assistantSpeaking, micOn }) {
               : "ring-2 ring-indigo-100"
         }`}
       >
-        <img src="/logo2.png" alt="AI Satyam" className="w-full h-full object-cover" />
+        <img src={agent.avatar} alt={agent.assistantLabel} className="w-full h-full object-cover" />
       </div>
 
       {mode !== "muted" && (
@@ -199,7 +201,7 @@ function SpeakingIndicator({ role, label, active, color }) {
   );
 }
 
-function CallSession({ micOn, setMicOn, onEndCall, callDuration, formatDuration }) {
+function CallSession({ micOn, setMicOn, onEndCall, callDuration, formatDuration, agent }) {
   const { state: agentState } = useVoiceAssistant();
   const { localParticipant } = useLocalParticipant();
   const userSpeaking = useIsSpeaking(localParticipant);
@@ -210,13 +212,13 @@ function CallSession({ micOn, setMicOn, onEndCall, callDuration, formatDuration 
     agentState === "connecting" || agentState === "initializing";
 
   if (isConnecting) {
-    return <ConnectingToSatyam />;
+    return <ConnectingToAgent agent={agent} />;
   }
 
   const statusLabel = assistantSpeaking
-    ? "Satyam is speaking"
+    ? `${agent.speakingPrefix} is speaking`
     : assistantThinking
-      ? "Satyam is thinking..."
+      ? `${agent.speakingPrefix} is thinking...`
       : userSpeaking
         ? "You're speaking"
         : !micOn
@@ -261,10 +263,11 @@ function CallSession({ micOn, setMicOn, onEndCall, callDuration, formatDuration 
             userSpeaking={userSpeaking && micOn}
             assistantSpeaking={assistantSpeaking}
             micOn={micOn}
+            agent={agent}
           />
 
           <div className="text-center">
-            <h3 className="text-lg font-semibold text-slate-900">AI Satyam</h3>
+            <h3 className="text-lg font-semibold text-slate-900">{agent.assistantLabel}</h3>
             <p className="text-sm text-slate-500 mt-0.5">
               {assistantSpeaking
                 ? "Listen to my response..."
@@ -287,7 +290,7 @@ function CallSession({ micOn, setMicOn, onEndCall, callDuration, formatDuration 
             />
             <SpeakingIndicator
               role="assistant"
-              label="Satyam"
+              label={agent.shortName}
               active={assistantSpeaking}
               color="assistant"
             />
@@ -329,6 +332,25 @@ function CallSession({ micOn, setMicOn, onEndCall, callDuration, formatDuration 
 }
 
 export default function VoiceAgentPage() {
+  return (
+    <Suspense
+      fallback={
+        <section className="min-h-[calc(100vh-80px)] bg-slate-50 flex items-center justify-center text-slate-500">
+          Loading voice agent...
+        </section>
+      }
+    >
+      <VoiceAgentInner />
+    </Suspense>
+  );
+}
+
+function VoiceAgentInner() {
+  const searchParams = useSearchParams();
+  const agent = useMemo(
+    () => resolveAgentProfile(searchParams.get("profile")),
+    [searchParams]
+  );
   const [isInCall, setIsInCall] = useState(false);
   const [micOn, setMicOn] = useState(false);
   const [token, setToken] = useState(null);
@@ -357,7 +379,9 @@ export default function VoiceAgentPage() {
     setIsInCall(true);
     setCallDuration(0);
     try {
-      const res = await fetch(`${API_URL}/voicebot/?call_type=web`);
+      const res = await fetch(
+        `${API_URL}/voicebot/?call_type=web&profile=${encodeURIComponent(agent.key)}`
+      );
       const data = await res.json();
       setToken(data.token);
       setUrl(data.url);
@@ -400,7 +424,7 @@ export default function VoiceAgentPage() {
                 AI Voice Assistant
               </h1>
               <p className="text-sm text-slate-500 truncate">
-                Powered by LiveKit · GPT-4o · Deepgram
+                Powered by LiveKit · GPT-4o · Sarvam Saaras v3 · Bulbul v3
               </p>
             </div>
           </div>
@@ -418,11 +442,10 @@ export default function VoiceAgentPage() {
                 <HiSparkles className="text-white text-3xl" />
               </div>
               <h2 className="text-2xl font-semibold text-slate-900 mb-2">
-                Talk to AI Satyam
+                Talk to {agent.assistantLabel}
               </h2>
               <p className="text-sm text-slate-500 max-w-md leading-relaxed mb-8">
-                Have a real-time voice conversation about my AI automation work,
-                voice agents, WhatsApp bots, projects, and professional experience.
+                {agent.voiceBlurb}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-xl mb-8">
@@ -451,7 +474,7 @@ export default function VoiceAgentPage() {
               </p>
             </div>
           ) : showConnecting ? (
-            <ConnectingToSatyam />
+            <ConnectingToAgent agent={agent} />
           ) : (
             token &&
             url && (
@@ -467,6 +490,7 @@ export default function VoiceAgentPage() {
                   onEndCall={endCall}
                   callDuration={callDuration}
                   formatDuration={formatDuration}
+                  agent={agent}
                 />
               </LiveKitRoom>
             )
@@ -475,18 +499,18 @@ export default function VoiceAgentPage() {
 
         <div className="flex flex-wrap justify-center gap-3 mt-4">
           <a
-            href="/chatagent"
+            href={`/chatagent${agentQuery(agent.key)}`}
             className="inline-flex items-center gap-2 text-xs font-medium text-slate-600 bg-white border border-slate-200/80 hover:border-indigo-300 hover:text-indigo-600 px-3.5 py-2 rounded-full transition-colors shadow-sm"
           >
             <FaComments className="text-indigo-500" />
             Prefer Text Chat?
           </a>
           <a
-            href="/contact"
+            href={agent.hireHref}
             className="inline-flex items-center gap-2 text-xs font-medium text-slate-600 bg-white border border-slate-200/80 hover:border-indigo-300 hover:text-indigo-600 px-3.5 py-2 rounded-full transition-colors shadow-sm"
           >
             <FaRobot className="text-indigo-500" />
-            Hire for AI Automation
+            {agent.hireLabel}
           </a>
         </div>
       </div>

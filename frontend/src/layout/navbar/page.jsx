@@ -8,6 +8,7 @@ import {
   FaMicrophoneAlt,
   FaRobot,
   FaTimes,
+  FaUserFriends,
 } from "react-icons/fa";
 
 export default function Navbar() {
@@ -46,6 +47,16 @@ export default function Navbar() {
             >
               <FaMicrophoneAlt className="inline mr-2 text-indigo-400" />
               About
+            </a>
+            <span className="absolute left-0 -bottom-1 w-0 h-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
+          </li>
+          <li className="relative group">
+            <a
+              href="/team"
+              className="font-semibold text-indigo-700 hover:text-violet-600 transition-colors duration-200 flex items-center"
+            >
+              <FaUserFriends className="inline mr-2 text-emerald-500" />
+              Team
             </a>
             <span className="absolute left-0 -bottom-1 w-0 h-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-600 rounded-full transition-all duration-300 group-hover:w-full"></span>
           </li>
@@ -102,6 +113,16 @@ export default function Navbar() {
               >
                 <FaMicrophoneAlt className="text-indigo-400" />
                 About
+              </a>
+            </li>
+            <li>
+              <a
+                href="/team"
+                className="flex items-center gap-2 py-2 font-semibold text-indigo-700 hover:text-violet-600"
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaUserFriends className="text-emerald-500" />
+                Team
               </a>
             </li>
             <li>

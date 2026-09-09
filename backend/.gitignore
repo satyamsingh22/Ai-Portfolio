@@ -71,3 +71,7 @@ celerybeat.pid
 
 # LiveKit / local agent runtime
 *.pid
+
+# OS
+.DS_Store
+Thumbs.db

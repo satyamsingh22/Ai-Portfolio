@@ -1,0 +1,219 @@
+.mridul-banner {
+  position: relative;
+  width: 100%;
+  height: 54vh;
+  min-height: 340px;
+  max-height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: white;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 1.75rem 2.5rem 2rem;
+  background-color: #3d7ea8;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.28) 30%,
+      rgba(0, 0, 0, 0.08) 55%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    url("/mridul-ghibli-hero.png");
+  background-repeat: no-repeat;
+  background-position: 90% 40%;
+  background-size: 134%;
+}
+
+.mridul-banner-back {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.4rem 0.85rem;
+  margin-bottom: 1.1rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mridul-banner-back:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.mridul-banner-content {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  width: 100%;
+  text-align: left;
+  padding: 1.35rem 1.5rem 1.25rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  background: rgba(0, 0, 0, 0.32);
+  border-radius: 1.1rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  animation: mridulSlideUp 1.2s ease-in-out forwards;
+}
+
+.mridul-banner-title {
+  font-size: 2.6rem;
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.mridul-banner-subtitle {
+  font-size: 1.15rem;
+  margin: 0 0 0.65rem;
+  font-weight: 500;
+  opacity: 0.95;
+  color: #e0e0e0;
+}
+
+.mridul-banner-desc {
+  font-size: 0.98rem;
+  line-height: 1.55;
+  margin: 0 0 1rem;
+  opacity: 0.9;
+  color: #dcdcdc;
+}
+
+.mridul-social-links {
+  display: flex;
+  gap: 1.15rem;
+}
+
+.mridul-social-links a {
+  font-size: 2rem;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.mridul-social-links a:hover {
+  transform: scale(1.2);
+}
+
+.mridul-social-links .linkedin:hover {
+  color: #0077b5;
+}
+
+.mridul-social-links .github:hover {
+  color: #ccc;
+}
+
+.mridul-social-links .email:hover {
+  color: #34d399;
+}
+
+.mridul-social-links .phone:hover {
+  color: #67e8f9;
+}
+
+.mridul-agent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.15rem;
+}
+
+.mridul-agent-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mridul-agent-btn:hover {
+  transform: scale(1.05);
+}
+
+.mridul-agent-btn-voice {
+  color: #14532d;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.mridul-agent-btn-voice:hover {
+  background: #ecfdf5;
+}
+
+.mridul-agent-btn-chat {
+  color: #fff;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+.mridul-agent-btn-chat:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@keyframes mridulSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .mridul-banner {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 1.25rem 1.15rem 1.5rem;
+    align-items: center;
+    background-position: 86% 38%;
+    background-size: 150%;
+  }
+
+  .mridul-banner-back {
+    align-self: flex-start;
+    margin-bottom: 0.85rem;
+  }
+
+  .mridul-banner-content {
+    text-align: center;
+    max-width: 100%;
+    padding: 1.15rem 1.1rem 1.1rem;
+  }
+
+  .mridul-banner-title {
+    font-size: 1.9rem;
+  }
+
+  .mridul-banner-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .mridul-banner-desc {
+    font-size: 1rem;
+  }
+
+  .mridul-social-links {
+    justify-content: center;
+  }
+
+  .mridul-agent-actions {
+    justify-content: center;
+  }
+}
